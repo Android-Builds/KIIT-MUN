@@ -44,17 +44,20 @@ class AboutPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Flexible(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: <Widget>[
                     abouts[index].imageUrl != ''
                         ? Container(
-                            color: Colors.white,
+                            width: size.width,
+                            height: size.width,
+                            padding: EdgeInsets.all(20.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                             child: CachedNetworkImage(
                               imageUrl: abouts[index].imageUrl,
                               placeholder: (context, url) => Center(
@@ -63,14 +66,15 @@ class AboutPage extends StatelessWidget {
                             ),
                           )
                         : SizedBox.shrink(),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Text(
                       abouts[index].description,
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                         fontSize: 14.0,
                       ),
-                    )
+                    ),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),

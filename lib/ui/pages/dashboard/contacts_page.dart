@@ -85,15 +85,12 @@ class ContactsPage extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              FloatingActionButton(
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.green,
-                heroTag: members.values.elementAt(index)['name'],
-                child: Icon(
+              IconButton(
+                color: Colors.green,
+                icon: Icon(
                   Icons.call,
                   size: size.width * 0.06,
                 ),
-                mini: true,
                 onPressed: () async {
                   String url =
                       'tel:${members.values.elementAt(index)['phone']}';

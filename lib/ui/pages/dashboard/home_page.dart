@@ -1,12 +1,14 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mun/ui/widgets/customFlipPanel.dart';
+import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../announce.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Size size;
-  bool done = false;
+  bool darkmode;
 
   @override
   void initState() {
@@ -25,67 +27,160 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    bool darkmode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    darkmode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AbsorbPointer(child: carouselWidget(context, size)),
-          !done
-              ? FlipClock(
-                  onDone: () {
-                    done = true;
-                    setState(() {});
-                  },
-                  duration: Duration(
-                    days: days,
-                    hours: hours,
-                    minutes: minutes,
-                    seconds: seconds,
-                  ),
-                  spacing: EdgeInsets.symmetric(
-                    vertical: 5.0,
-                    horizontal: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(2.0),
-                  digitColor: darkmode ? Colors.black : Colors.white,
-                  backgroundColor: darkmode ? Colors.white : Colors.black,
-                  digitSize: size.width * 0.05,
-                )
-              : FlatButton(
-                  onPressed: () {},
-                  child: Text('Live Feed'),
-                ),
-          !done
-              ? MaterialButton(
-                  minWidth: size.width * 0.35,
-                  height: size.width * 0.11,
-                  color: Colors.green[300],
-                  child: Text(
-                    'Register Now',
-                    style: GoogleFonts.montserrat(
-                      fontSize: size.width * 0.037,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () async {
-                    String url = 'https://kiitmun.org/registration.php';
-                    if (await canLaunch(url)) {
-                      launch(url);
-                    }
-                  })
-              : SizedBox.shrink(),
+          Spacer(),
+          !done ? timerWidgets() : buildAnnounce(context, size),
         ],
       ),
     );
   }
 
+  Widget buildAnnounce(BuildContext context, Size size) {
+    return Column(
+      children: [
+        FlatButton(
+          padding: EdgeInsets.zero,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: size.height * 0.16,
+                width: size.width * 0.87,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.speaker_phone,
+                      color: darkmode
+                          ? Colors.white.withOpacity(0.4)
+                          : Colors.black.withOpacity(0.4),
+                      size: size.width * 0.12,
+                    ),
+                    Text(
+                      'Live Feed',
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
+                        color: darkmode
+                            ? Colors.white.withOpacity(0.3)
+                            : Colors.black.withOpacity(0.3),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height * 0.16,
+                width: size.width * 0.87,
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: darkmode
+                      ? Colors.white.withOpacity(0.15)
+                      : Colors.black.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Announce())),
+        ),
+        SizedBox(height: 30.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            MediaButtons(
+              icon: FontAwesomeIcons.facebookF,
+              url: 'https://www.facebook.com/kiitmun',
+            ),
+            MediaButtons(
+              icon: FontAwesomeIcons.instagram,
+              url: 'https://www.instagram.com/instakiitmun/',
+            ),
+            MediaButtons(
+              icon: FontAwesomeIcons.twitter,
+              url: 'https://twitter.com/kiitmun?s=08',
+            ),
+            MediaButtons(
+              icon: FontAwesomeIcons.linkedinIn,
+              url: 'https://www.linkedin.com/in/kiitmun',
+            ),
+            MediaButtons(
+              icon: FontAwesomeIcons.chrome,
+              url: 'https://kiitmun.org/',
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget timerWidgets() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text(
+          'Event Live in: ',
+          style: TextStyle(
+            fontSize: size.width * 0.06,
+            color: Colors.green[300],
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 50.0),
+        FlipClock(
+          onDone: () {
+            done = true;
+            setState(() {});
+          },
+          duration: Duration(
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+          ),
+          spacing: EdgeInsets.symmetric(
+            vertical: 5.0,
+            horizontal: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(2.0),
+          digitColor: darkmode ? Colors.black : Colors.white,
+          backgroundColor: darkmode ? Colors.white : Colors.black,
+          digitSize: size.width * 0.05,
+        ),
+        SizedBox(height: 50.0),
+        MaterialButton(
+            minWidth: size.width * 0.35,
+            height: size.width * 0.11,
+            color: Colors.green[300],
+            child: Text(
+              'Register Now',
+              style: GoogleFonts.montserrat(
+                fontSize: size.width * 0.037,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () async {
+              String url = 'https://kiitmun.org/registration.php';
+              if (await canLaunch(url)) {
+                launch(url);
+              }
+            }),
+      ],
+    );
+  }
+
   Widget buildCarousel(width) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: BorderRadius.circular(20.0),
       child: CarouselSlider(
         options: CarouselOptions(
           height: width * 0.9,
@@ -146,20 +241,13 @@ class _HomePageState extends State<HomePage> {
   Widget overlayCarousel() {
     List<Widget> overlay = [
       Container(),
-      // munWidget(),
       Container(
         height: size.width * 0.9,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Opacity(
-            opacity: 0.8,
-            child: Container(
-              alignment: Alignment.center,
-              child: munWidget(),
-              color: Colors.black,
-            ),
-          ),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(20.0),
         ),
+        child: munWidget(),
       ),
     ];
 
@@ -185,32 +273,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget carouselWidget(BuildContext context, Size size) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          Container(
-            child: buildCarousel(size.width),
+    return Stack(
+      children: <Widget>[
+        Container(
+          child: buildCarousel(size.width),
+        ),
+        Center(
+          child: Container(
+            height: size.width * 0.9,
+            child: overlayCarousel(),
           ),
-          // Container(
-          //   height: size.width * 0.8,
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.circular(10),
-          //     child: Opacity(
-          //       opacity: 0.8,
-          //       child: Container(
-          //         color: Colors.black,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Center(
-            child: Container(
-              height: size.width * 0.9,
-              child: overlayCarousel(),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

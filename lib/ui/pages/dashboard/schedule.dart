@@ -1,10 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mun/ui/pages/dashboard/schedule/tab.dart';
+import 'package:mun/ui/widgets/updated.dart';
 
 class Schedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("schedule").snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasData) {
+          Map event = snapshot.data.docs[0].data();
+          return event['isUpdated'] ? body(event['schedule']) : Updated();
+        } else {
+          return Center(
+            child: Text('Error fetching details'),
+          );
+        }
+      },
+    );
+  }
+
+  Widget body(Map event) {
+    print(event);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -17,9 +40,9 @@ class Schedule extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ScheduleTab(queryString: 'Friday'),
-            ScheduleTab(queryString: 'Saturday'),
-            ScheduleTab(queryString: 'Sunday'),
+            ScheduleTab(event: event['Friday']),
+            ScheduleTab(event: event['Saturday']),
+            ScheduleTab(event: event['Sunday']),
           ],
         ),
       ),
