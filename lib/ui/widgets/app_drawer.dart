@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mun/ui/pages/announce.dart';
 import 'package:mun/ui/pages/drawer/agendas.dart';
 import 'package:mun/ui/pages/drawer/committee.dart';
 import 'package:mun/ui/pages/drawer/about/about_page.dart';
@@ -9,6 +7,7 @@ import 'package:mun/ui/pages/drawer/credits.dart';
 import 'package:mun/ui/pages/drawer/executuve_board.dart';
 import 'package:mun/ui/pages/drawer/partners.dart';
 import 'package:mun/ui/pages/drawer/sponsors.dart';
+import 'package:mun/ui/pages/drawer/study_guide.dart';
 import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/utils/constants.dart';
 
@@ -21,6 +20,9 @@ class AppDrawer extends StatelessWidget {
     TextStyle drawerStyle = TextStyle(
       fontSize: size.width * 0.035,
       fontWeight: FontWeight.w600,
+    );
+    TextStyle drawerStyleMini = TextStyle(
+      fontSize: size.width * 0.03,
     );
     return Drawer(
       child: Container(
@@ -67,26 +69,49 @@ class AppDrawer extends StatelessWidget {
                     ),
                   )
                 : SizedBox.shrink(),
-            ListTile(
-              title: Text(
-                'Committees',
-                style: drawerStyle,
-              ),
-              onTap: () => {
-                Navigator.pop(context),
-                Future.delayed(const Duration(milliseconds: 150), () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CommittePage()),
-                  );
-                }),
-              },
+            ExpansionTile(
+              title: Text('Committees', style: drawerStyle),
+              children: [
+                ListTile(
+                  title: Text('Committee Details', style: drawerStyleMini),
+                  onTap: () => {
+                    Navigator.pop(context),
+                    Future.delayed(const Duration(milliseconds: 150), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CommittePage()),
+                      );
+                    }),
+                  },
+                ),
+                ListTile(
+                  title: Text('Agendas', style: drawerStyleMini),
+                  onTap: () => {
+                    Navigator.pop(context),
+                    Future.delayed(const Duration(milliseconds: 150), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Agendas()),
+                      );
+                    }),
+                  },
+                ),
+                ListTile(
+                  title: Text('Study Guide', style: drawerStyleMini),
+                  onTap: () => {
+                    Navigator.pop(context),
+                    Future.delayed(const Duration(milliseconds: 150), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StudyGuide()),
+                      );
+                    }),
+                  },
+                ),
+              ],
             ),
             ListTile(
-              title: Text(
-                'Executive Board',
-                style: drawerStyle,
-              ),
+              title: Text('Executive Board', style: drawerStyle),
               onTap: () => {
                 Navigator.pop(context),
                 Future.delayed(const Duration(milliseconds: 150), () {
@@ -98,37 +123,7 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text(
-                'Agendas',
-                style: drawerStyle,
-              ),
-              onTap: () => {
-                Navigator.pop(context),
-                Future.delayed(const Duration(milliseconds: 150), () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Agendas()),
-                  );
-                }),
-              },
-            ),
-            // ListTile(
-            //   title: Text('Announce'),
-            //   onTap: () => {
-            //     Navigator.pop(context),
-            //     Future.delayed(const Duration(milliseconds: 150), () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(builder: (context) => Announce()),
-            //       );
-            //     }),
-            //   },
-            // ),
-            ListTile(
-              title: Text(
-                'Partners',
-                style: drawerStyle,
-              ),
+              title: Text('Partners', style: drawerStyle),
               onTap: () => {
                 Navigator.pop(context),
                 Future.delayed(const Duration(milliseconds: 150), () {
@@ -140,10 +135,7 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text(
-                'Sponsors',
-                style: drawerStyle,
-              ),
+              title: Text('Sponsors', style: drawerStyle),
               onTap: () => {
                 Navigator.pop(context),
                 Future.delayed(const Duration(milliseconds: 150), () {
@@ -155,20 +147,12 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ExpansionTile(
-              title: Text(
-                'About',
-                style: drawerStyle,
-              ),
+              title: Text('About', style: drawerStyle),
               children: List.generate(
                 abouts.length,
                 (index) {
                   return ListTile(
-                    title: Text(
-                      abouts[index].name,
-                      style: GoogleFonts.montserrat(
-                        fontSize: size.width * 0.03,
-                      ),
-                    ),
+                    title: Text(abouts[index].name, style: drawerStyleMini),
                     onTap: () => {
                       Navigator.pop(context),
                       Future.delayed(const Duration(milliseconds: 150), () {
@@ -187,10 +171,7 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(
-                'Credits',
-                style: drawerStyle,
-              ),
+              title: Text('Credits', style: drawerStyle),
               onTap: () => {
                 Navigator.pop(context),
                 Future.delayed(const Duration(milliseconds: 150), () {

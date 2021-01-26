@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/updated.dart';
 import '../../widgets/connectInternet.dart';
 import 'package:connectivity/connectivity.dart';
@@ -70,9 +71,7 @@ class _LoadPartnersState extends State<LoadPartners> {
                 FirebaseFirestore.instance.collection("partners").snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return Loader();
               } else if (snapshot.hasData) {
                 Map partners = snapshot.data.docs[0].data();
                 return partners['isUpdated']
@@ -88,22 +87,24 @@ class _LoadPartnersState extends State<LoadPartners> {
   }
 
   partnerList(Map partners) {
-    return GridView.count(
-      padding: EdgeInsets.all(10.0),
-      crossAxisCount: 3,
-      children: List.generate(partners.length, (index) {
-        return Container(
-          margin: EdgeInsets.all(10.0),
-          padding: EdgeInsets.all(5.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: CachedNetworkImage(
-            imageUrl: partners.values.elementAt(index),
-          ),
-        );
-      }),
+    final size = MediaQuery.of(context).size;
+    return ListView.builder(
+      itemCount: partners.length,
+      itemBuilder: (context, index) => Container(
+        height: size.height * 0.25,
+        margin: EdgeInsets.symmetric(
+          horizontal: 100.0,
+          vertical: 10.0,
+        ),
+        padding: EdgeInsets.all(30.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: CachedNetworkImage(
+          imageUrl: partners.values.elementAt(index),
+        ),
+      ),
     );
   }
 }

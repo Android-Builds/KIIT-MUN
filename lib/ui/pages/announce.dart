@@ -105,8 +105,6 @@ class _AnnounceLoaderState extends State<AnnounceLoader> {
                 FirebaseFirestore.instance.collection('announce').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return Loader();
-              final int count = snapshot.data.documents.length;
-              if (count == 0) return Updated();
               //print(snapshot.data.docs[0].data());
               //print('------------');
               var data = snapshot.data.docs.reversed.elementAt(0).data();
@@ -126,7 +124,6 @@ class _AnnounceLoaderState extends State<AnnounceLoader> {
 }
 
 Widget buildFeed(BuildContext context, var feedListItem, Size size) {
-  double w = MediaQuery.of(context).size.width;
   String t = readTimestamp(feedListItem['time'].toDate());
   bool img = false;
   if (feedListItem['img'] != '' || feedListItem['img'] != null) {

@@ -48,9 +48,6 @@ class Credits extends StatelessWidget {
             CircleAvatar(
               radius: size.width * 0.2,
               backgroundImage: AssetImage('assets/debjit.jpg'),
-              // backgroundImage: CachedNetworkImageProvider(
-              //   'https://avatars1.githubusercontent.com/u/38371196?s=400&u=531afe2c7ad49d0ca0a5cccd2fb5303caeda74d5&v=4',
-              // ),
             ),
             SizedBox(height: 40),
             Text(

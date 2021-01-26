@@ -4,6 +4,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
 
 class CommittePage extends StatefulWidget {
@@ -60,7 +61,7 @@ class _CommittePageState extends State<CommittePage> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting)
-                  return Center(child: CircularProgressIndicator());
+                  return Loader();
                 else if (snapshot.hasData) {
                   Map doc = snapshot.data.docs[0].data();
                   //print(doc);

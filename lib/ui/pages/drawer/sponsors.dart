@@ -85,44 +85,25 @@ class _LoadSponsorsState extends State<LoadSponsors> {
   }
 
   sponsorList(Map sponsors) {
-    final size = MediaQuery.of(context).size;
     return GridView.count(
+      padding: EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 10.0,
+      ),
       crossAxisCount: 2,
       children: List.generate(sponsors.length, (index) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              sponsors.keys.elementAt(index),
-              style: TextStyle(
-                fontSize: size.width * 0.035,
-                fontWeight: FontWeight.bold,
-                color: Colors.green[300],
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: size.height / 8,
-              width: size.height / 8,
-              child: Center(
-                child: CachedNetworkImage(
-                  imageUrl: sponsors.values.elementAt(index)['image'],
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Center(
-              child: Text(
-                sponsors.values.elementAt(index)['name'],
-                style: TextStyle(
-                  fontSize: size.width * 0.03,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-          ],
+        return Container(
+          padding: const EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: sponsors['${index + 1}'],
+            placeholder: (context, url) =>
+                Center(child: CircularProgressIndicator()),
+          ),
         );
       }),
     );

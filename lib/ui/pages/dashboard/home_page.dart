@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mun/ui/widgets/customFlipPanel.dart';
 import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/utils/constants.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../announce.dart';
 
@@ -44,8 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget buildAnnounce(BuildContext context, Size size) {
     return Column(
       children: [
-        FlatButton(
-          padding: EdgeInsets.zero,
+        TextButton(
           child: Stack(
             children: <Widget>[
               Container(
@@ -156,24 +154,13 @@ class _HomePageState extends State<HomePage> {
           digitSize: size.width * 0.05,
         ),
         SizedBox(height: 50.0),
-        MaterialButton(
-            minWidth: size.width * 0.35,
-            height: size.width * 0.11,
+        Text(
+          '#VoicesAgainstVices',
+          style: TextStyle(
+            fontSize: size.width * 0.04,
             color: Colors.green[300],
-            child: Text(
-              'Register Now',
-              style: GoogleFonts.montserrat(
-                fontSize: size.width * 0.037,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onPressed: () async {
-              String url = 'https://kiitmun.org/registration.php';
-              if (await canLaunch(url)) {
-                launch(url);
-              }
-            }),
+          ),
+        )
       ],
     );
   }
@@ -201,10 +188,11 @@ class _HomePageState extends State<HomePage> {
             builder: (BuildContext context) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(i),
+                child: CachedNetworkImage(
+                  imageUrl: i,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(),
                   ),
                 ),
               );

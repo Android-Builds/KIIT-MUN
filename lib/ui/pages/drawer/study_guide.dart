@@ -1,28 +1,24 @@
 import 'dart:async';
-import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mun/ui/pages/drawer/pdf_viewer/view_pdf.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
 
-class Agendas extends StatefulWidget {
+class StudyGuide extends StatefulWidget {
   @override
-  _AgendasState createState() => _AgendasState();
+  _StudyGuideState createState() => _StudyGuideState();
 }
 
-class _AgendasState extends State<Agendas> {
-  Random random = Random();
-  int i;
+class _StudyGuideState extends State<StudyGuide> {
   Connectivity connectivity;
   bool isOffline = false;
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
-    i = (random.nextInt(2) + 2);
     connectivity = new Connectivity();
     _connectivitySubscription =
         connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
@@ -50,7 +46,7 @@ class _AgendasState extends State<Agendas> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Agendas',
+          'Study Guide',
           style: TextStyle(
             fontSize: size.width * 0.04,
             fontWeight: FontWeight.bold,
@@ -60,14 +56,15 @@ class _AgendasState extends State<Agendas> {
       body: isOffline
           ? Connect(size: size)
           : StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("agendas").snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("study_guide")
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting)
                   return Loader();
                 else if (snapshot.hasData) {
-                  Map agendas = snapshot.data.docs[0].data()['agendas'];
-                  return agendaList(agendas, size);
+                  Map doc = snapshot.data.docs[0].data()['guides'];
+                  return commiteeList(doc, size);
                 } else
                   return Center(child: Text('Error Fetching Data'));
               },
@@ -75,29 +72,39 @@ class _AgendasState extends State<Agendas> {
     );
   }
 
-  agendaList(Map agendas, Size size) {
+  Widget commiteeList(Map map, Size size) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      itemCount: agendas.length,
+      controller: ScrollController(),
+      padding: EdgeInsets.all(10.0),
+      itemCount: map.length,
       itemBuilder: (context, index) {
-        if (index == i) {
-          return SizedBox.shrink();
-        } else {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: CachedNetworkImage(
-                imageUrl: agendas['${index + 1}'],
-                placeholder: (context, url) => Container(
-                  alignment: Alignment.center,
-                  height: 200.0,
-                  child: CircularProgressIndicator(),
-                ),
+        return Card(
+          child: ListTile(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ViewPdf(
+                          url: map.values.elementAt(index)['docUrl'],
+                          name: map.values.elementAt(index)['name'],
+                        ))),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 30.0,
+              vertical: 10.0,
+            ),
+            leading: Text('${index + 1}.'),
+            title: Text(
+              map.values.elementAt(index)['name'],
+              style: TextStyle(
+                color: Colors.green[300],
+                fontWeight: FontWeight.bold,
               ),
             ),
-          );
-        }
+            subtitle: Text(
+              map.values.elementAt(index)['fullForm'],
+              style: TextStyle(fontSize: size.width * 0.03),
+            ),
+          ),
+        );
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mun/ui/pages/dashboard/schedule/tab.dart';
+import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/updated.dart';
 
 class Schedule extends StatelessWidget {
@@ -11,9 +12,7 @@ class Schedule extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection("schedule").snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Loader();
         } else if (snapshot.hasData) {
           Map event = snapshot.data.docs[0].data();
           return event['isUpdated'] ? body(event['schedule']) : Updated();

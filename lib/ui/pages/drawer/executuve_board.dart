@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mun/ui/widgets/Loader.dart';
 import 'dart:async';
 import '../../widgets/connectInternet.dart';
 import 'package:connectivity/connectivity.dart';
@@ -69,9 +70,7 @@ class _LoadEBState extends State<LoadEB> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return Loader();
               } else if (snapshot.hasData) {
                 Map board = snapshot.data.docs[0].data();
                 return boardlist(board, size.width);

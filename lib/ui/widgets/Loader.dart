@@ -14,7 +14,6 @@ class _LoaderState extends State<Loader> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           LottieBuilder.asset('assets/loader.json'),
-          //SizedBox(height:40),
           Text(
             'Loading...',
             style: TextStyle(
