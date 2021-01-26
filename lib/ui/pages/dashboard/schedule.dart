@@ -26,7 +26,6 @@ class Schedule extends StatelessWidget {
   }
 
   Widget body(Map event) {
-    print(event);
     return DefaultTabController(
       length: 3,
       child: Scaffold(

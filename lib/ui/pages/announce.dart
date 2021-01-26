@@ -105,8 +105,6 @@ class _AnnounceLoaderState extends State<AnnounceLoader> {
                 FirebaseFirestore.instance.collection('announce').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return Loader();
-              //print(snapshot.data.docs[0].data());
-              //print('------------');
               var data = snapshot.data.docs.reversed.elementAt(0).data();
               return !data['isUpdated']
                   ? Updated()

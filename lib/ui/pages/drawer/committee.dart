@@ -64,7 +64,6 @@ class _CommittePageState extends State<CommittePage> {
                   return Loader();
                 else if (snapshot.hasData) {
                   Map doc = snapshot.data.docs[0].data();
-                  //print(doc);
                   return commiteeList(doc, size);
                 } else
                   return Center(child: Text('Error Fetching Data'));
