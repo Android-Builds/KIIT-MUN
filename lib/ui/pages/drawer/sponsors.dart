@@ -32,9 +32,9 @@ class LoadSponsors extends StatefulWidget {
 }
 
 class _LoadSponsorsState extends State<LoadSponsors> {
-  Connectivity connectivity;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _LoadSponsorsState extends State<LoadSponsors> {
         : StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection("sponsors").snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Loader();
               } else if (snapshot.hasData) {

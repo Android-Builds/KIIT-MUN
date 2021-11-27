@@ -6,9 +6,9 @@ class MediaButtons extends StatelessWidget {
   final String url;
 
   const MediaButtons({
-    Key key,
-    @required this.icon,
-    @required this.url,
+    Key? key,
+    required this.icon,
+    required this.url,
   }) : super(key: key);
 
   @override
@@ -51,11 +51,11 @@ class MediaButtons extends StatelessWidget {
 }
 
 class MiniMediaButtons extends StatelessWidget {
-  final IconData icon;
-  final String url;
+  final IconData? icon;
+  final String? url;
 
   const MiniMediaButtons({
-    Key key,
+    Key? key,
     this.icon,
     this.url,
   }) : super(key: key);
@@ -74,7 +74,7 @@ class MiniMediaButtons extends StatelessWidget {
               : Colors.black.withOpacity(0.4),
         ),
         onPressed: () async {
-          if (await canLaunch(url)) launch(url);
+          if (await canLaunch(url!)) launch(url!);
         });
   }
 }

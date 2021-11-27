@@ -13,9 +13,9 @@ class StudyGuide extends StatefulWidget {
 }
 
 class _StudyGuideState extends State<StudyGuide> {
-  Connectivity connectivity;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _StudyGuideState extends State<StudyGuide> {
               stream: FirebaseFirestore.instance
                   .collection("study_guide")
                   .snapshots(),
-              builder: (context, snapshot) {
+              builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting)
                   return Loader();
                 else if (snapshot.hasData) {

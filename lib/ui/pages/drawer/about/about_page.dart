@@ -5,7 +5,7 @@ import 'package:mun/utils/constants.dart';
 class AboutPage extends StatelessWidget {
   final int index;
 
-  const AboutPage({Key key, @required this.index}) : super(key: key);
+  const AboutPage({Key? key, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

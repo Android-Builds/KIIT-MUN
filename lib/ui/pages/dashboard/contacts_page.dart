@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mun/ui/widgets/Loader.dart';
+import 'package:mun/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactsPage extends StatelessWidget {
@@ -31,7 +32,7 @@ class ContactsPage extends StatelessWidget {
             child: StreamBuilder(
               stream:
                   FirebaseFirestore.instance.collection("members").snapshots(),
-              builder: (context, snapshot) {
+              builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Loader();
                 } else if (snapshot.hasData) {
@@ -52,6 +53,7 @@ class ContactsPage extends StatelessWidget {
 
   Widget contactList(Map members, Size size) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: members.length,
       itemBuilder: (context, index) {
         return Container(
@@ -60,9 +62,14 @@ class ContactsPage extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                radius: 35.0,
-                backgroundImage: CachedNetworkImageProvider(
-                    members.values.elementAt(index)['imageUrl']),
+                radius: 35.5,
+                backgroundColor: darkMode ? Colors.white : Colors.black,
+                child: CircleAvatar(
+                  radius: 35.0,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  backgroundImage: CachedNetworkImageProvider(
+                      members.values.elementAt(index)['imageUrl']),
+                ),
               ),
               SizedBox(width: 30.0),
               RichText(

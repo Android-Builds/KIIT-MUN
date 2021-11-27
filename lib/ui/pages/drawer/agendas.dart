@@ -15,10 +15,10 @@ class Agendas extends StatefulWidget {
 
 class _AgendasState extends State<Agendas> {
   Random random = Random();
-  int i;
-  Connectivity connectivity;
+  int? i;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _AgendasState extends State<Agendas> {
           : StreamBuilder(
               stream:
                   FirebaseFirestore.instance.collection("agendas").snapshots(),
-              builder: (context, snapshot) {
+              builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting)
                   return Loader();
                 else if (snapshot.hasData) {

@@ -10,7 +10,7 @@ class CountDownTimer extends StatefulWidget {
 }
 
 class _CountDownTimerState extends State<CountDownTimer> {
-  Timer t;
+  Timer? t;
 
   initTime() {
     now = DateTime.now();
@@ -21,17 +21,17 @@ class _CountDownTimerState extends State<CountDownTimer> {
   }
 
   updateTime() {
-    seconds--;
+    seconds = seconds! - 1;
     if (seconds == -1) {
-      minutes--;
+      minutes = minutes! - 1;
       seconds = 59;
     }
     if (minutes == -1) {
-      hours--;
+      hours = hours! - 1;
       minutes = 59;
     }
     if (hours == -1) {
-      days--;
+      days = days! - 1;
       hours = 23;
     }
   }
@@ -44,8 +44,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
 
   @override
   void dispose() {
-    if (t != null && t.isActive) {
-      t.cancel();
+    if (t != null && t!.isActive) {
+      t!.cancel();
     }
     super.dispose();
   }

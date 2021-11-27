@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mun/ui/widgets/customFlipPanel.dart';
-import 'package:mun/ui/widgets/media_buttons.dart';
-import 'package:mun/utils/constants.dart';
+import 'dart:ui';
 
-import '../announce.dart';
+import 'package:flutter/material.dart';
+import 'package:mun/ui/widgets/announcewidget.dart';
+import 'package:mun/ui/widgets/carousel.dart';
+import 'package:mun/ui/widgets/customFlipPanel.dart';
+import 'package:mun/ui/widgets/overlaycarousel.dart';
+import 'package:mun/ui/widgets/testimonials.dart';
+import 'package:mun/utils/constants.dart';
+import 'package:mun/utils/themes.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,8 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Size size;
-  bool darkmode;
+  late Size size;
+  late bool darkmode;
 
   @override
   void initState() {
@@ -28,95 +28,27 @@ class _HomePageState extends State<HomePage> {
     size = MediaQuery.of(context).size;
     darkmode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           AbsorbPointer(child: carouselWidget(context, size)),
-          Spacer(),
-          !done ? timerWidgets() : buildAnnounce(context, size),
+          SizedBox(height: 20.0),
+          done ? timerWidgets() : AnnounceWidget(),
+          SizedBox(height: 20.0),
+          ListTile(
+            dense: true,
+            title: Text(
+              'Testimonials',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: size.width * 0.04,
+              ),
+            ),
+          ),
+          Testimonials(),
         ],
       ),
-    );
-  }
-
-  Widget buildAnnounce(BuildContext context, Size size) {
-    return Column(
-      children: [
-        TextButton(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: size.height * 0.16,
-                width: size.width * 0.87,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.speaker_phone,
-                      color: darkmode
-                          ? Colors.white.withOpacity(0.4)
-                          : Colors.black.withOpacity(0.4),
-                      size: size.width * 0.12,
-                    ),
-                    Text(
-                      'Live Feed',
-                      style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold,
-                        color: darkmode
-                            ? Colors.white.withOpacity(0.3)
-                            : Colors.black.withOpacity(0.3),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: size.height * 0.16,
-                width: size.width * 0.87,
-                padding: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: darkmode
-                      ? Colors.white.withOpacity(0.15)
-                      : Colors.black.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ],
-          ),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Announce())),
-        ),
-        SizedBox(height: 30.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MediaButtons(
-              icon: FontAwesomeIcons.facebookF,
-              url: 'https://www.facebook.com/kiitmun',
-            ),
-            MediaButtons(
-              icon: FontAwesomeIcons.instagram,
-              url: 'https://www.instagram.com/instakiitmun/',
-            ),
-            MediaButtons(
-              icon: FontAwesomeIcons.twitter,
-              url: 'https://twitter.com/kiitmun?s=08',
-            ),
-            MediaButtons(
-              icon: FontAwesomeIcons.linkedinIn,
-              url: 'https://www.linkedin.com/in/kiitmun',
-            ),
-            MediaButtons(
-              icon: FontAwesomeIcons.chrome,
-              url: 'https://kiitmun.org/',
-            ),
-          ],
-        )
-      ],
     );
   }
 
@@ -128,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           'Event Live in: ',
           style: TextStyle(
             fontSize: size.width * 0.06,
-            color: Colors.green[300],
+            color: accentColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -139,10 +71,10 @@ class _HomePageState extends State<HomePage> {
             setState(() {});
           },
           duration: Duration(
-            days: days,
-            hours: hours,
-            minutes: minutes,
-            seconds: seconds,
+            days: days!,
+            hours: hours!,
+            minutes: minutes!,
+            seconds: seconds!,
           ),
           spacing: EdgeInsets.symmetric(
             vertical: 5.0,
@@ -155,108 +87,13 @@ class _HomePageState extends State<HomePage> {
         ),
         SizedBox(height: 50.0),
         Text(
-          '#VoicesAgainstVices',
+          tagLine,
           style: TextStyle(
             fontSize: size.width * 0.04,
-            color: Colors.green[300],
+            color: accentColor,
           ),
         )
       ],
-    );
-  }
-
-  Widget buildCarousel(width) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),
-      child: CarouselSlider(
-        options: CarouselOptions(
-          height: width * 0.9,
-          pauseAutoPlayOnTouch: false,
-          aspectRatio: 16 / 9,
-          viewportFraction: 1,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
-          autoPlayAnimationDuration: Duration(milliseconds: 2000),
-          autoPlayCurve: Curves.fastOutSlowIn,
-          scrollDirection: Axis.horizontal,
-        ),
-        items: images.map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                child: CachedNetworkImage(
-                  imageUrl: i,
-                  fit: BoxFit.cover,
-                  progressIndicatorBuilder: (context, url, progress) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              );
-            },
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget munWidget() {
-    return Container(
-      height: size.width * 0.9,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: size.width * 0.5,
-            width: size.width * 0.5,
-            child: Image.asset('$munLogo'),
-          ),
-          Text(
-            'KIIT e-MUN\n\nJanuray 29 - January 31\n\n#VoicesAgainstVices',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.montserrat(
-              color: Colors.green[300],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget overlayCarousel() {
-    List<Widget> overlay = [
-      Container(),
-      Container(
-        height: size.width * 0.9,
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: munWidget(),
-      ),
-    ];
-
-    return CarouselSlider.builder(
-      options: CarouselOptions(
-        pauseAutoPlayOnTouch: false,
-        aspectRatio: 16 / 9,
-        viewportFraction: 1,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        reverse: false,
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 8),
-        autoPlayAnimationDuration: Duration(milliseconds: 2000),
-        autoPlayCurve: Curves.fastOutSlowIn,
-        scrollDirection: Axis.vertical,
-      ),
-      itemCount: overlay.length,
-      itemBuilder: (BuildContext context, int itemIndex) => Container(
-        child: overlay[itemIndex],
-      ),
     );
   }
 
@@ -264,12 +101,12 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         Container(
-          child: buildCarousel(size.width),
+          child: Carousel(),
         ),
         Center(
           child: Container(
             height: size.width * 0.9,
-            child: overlayCarousel(),
+            child: OverlayCarousel(),
           ),
         ),
       ],

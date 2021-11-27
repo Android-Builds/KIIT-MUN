@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final Color accentColor = Colors.red.shade300;
+
 ThemeData lightTheme = ThemeData.light().copyWith(
-  accentColor: Colors.green[300],
   textTheme: lightTextTheme,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   scaffoldBackgroundColor: Colors.white,
@@ -10,24 +11,24 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     elevation: 0.0,
     color: Colors.white,
     iconTheme: iconTheme,
-    textTheme: lightTextTheme,
+    titleTextStyle: TextStyle(color: Colors.black),
   ),
   tabBarTheme: TabBarTheme(
     labelStyle: fontStyle.copyWith(color: Colors.black),
-    labelColor: Colors.green[300],
+    labelColor: accentColor,
     unselectedLabelColor: Colors.black,
     indicator: UnderlineTabIndicator(
       borderSide: BorderSide(
-        color: Colors.green[300],
+        color: accentColor,
         width: 2.0,
       ),
     ),
   ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
 );
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
   cardColor: Colors.grey[900],
-  accentColor: Colors.green[300],
   visualDensity: VisualDensity.adaptivePlatformDensity,
   canvasColor: Colors.black,
   textTheme: textTheme,
@@ -36,17 +37,17 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     backgroundColor: Colors.grey[900],
   ),
   appBarTheme: AppBarTheme(
+    elevation: 0.0,
     color: Colors.black,
-    textTheme: textTheme,
     iconTheme: iconTheme,
   ),
   tabBarTheme: TabBarTheme(
     labelStyle: fontStyle,
-    labelColor: Colors.green[300],
+    labelColor: accentColor,
     unselectedLabelColor: Colors.white,
     indicator: UnderlineTabIndicator(
       borderSide: BorderSide(
-        color: Colors.green[300],
+        color: accentColor,
         width: 2.0,
       ),
     ),
@@ -55,11 +56,12 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   dialogBackgroundColor: Colors.black,
   snackBarTheme: SnackBarThemeData(
     backgroundColor: Colors.grey[900],
-    actionTextColor: Colors.green[300],
+    actionTextColor: accentColor,
     contentTextStyle: TextStyle(
       color: Colors.white,
     ),
   ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
 );
 
 TextStyle fontStyle = GoogleFonts.montserrat();
@@ -90,4 +92,4 @@ TextTheme lightTextTheme = TextTheme(
   subtitle2: fontStyle.copyWith(color: Colors.black),
 );
 
-IconThemeData iconTheme = IconThemeData(color: Colors.green[300]);
+IconThemeData iconTheme = IconThemeData(color: accentColor);

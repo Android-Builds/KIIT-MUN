@@ -32,9 +32,9 @@ class LoadEB extends StatefulWidget {
 }
 
 class _LoadEBState extends State<LoadEB> {
-  Connectivity connectivity;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _LoadEBState extends State<LoadEB> {
             stream: FirebaseFirestore.instance
                 .collection("Executive Board")
                 .snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Loader();
               } else if (snapshot.hasData) {

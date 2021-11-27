@@ -7,8 +7,8 @@ class FlipTimer extends StatefulWidget {
   final StreamController controller;
 
   const FlipTimer({
-    Key key,
-    @required this.controller,
+    Key? key,
+    required this.controller,
   }) : super(key: key);
   @override
   _FlipTimerState createState() => _FlipTimerState();
@@ -32,10 +32,10 @@ class _FlipTimerState extends State<FlipTimer> {
         valueNotifier.value = true;
       },
       duration: Duration(
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
+        days: days!,
+        hours: hours!,
+        minutes: minutes!,
+        seconds: seconds!,
       ),
       digitColor: Colors.black,
       backgroundColor: Colors.white,

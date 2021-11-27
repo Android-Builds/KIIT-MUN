@@ -4,8 +4,10 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
+import 'package:mun/utils/themes.dart';
 
 class CommittePage extends StatefulWidget {
   @override
@@ -13,9 +15,9 @@ class CommittePage extends StatefulWidget {
 }
 
 class _CommittePageState extends State<CommittePage> {
-  Connectivity connectivity;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -59,7 +61,7 @@ class _CommittePageState extends State<CommittePage> {
               stream: FirebaseFirestore.instance
                   .collection("committees")
                   .snapshots(),
-              builder: (context, snapshot) {
+              builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting)
                   return Loader();
                 else if (snapshot.hasData) {
@@ -82,9 +84,13 @@ class _CommittePageState extends State<CommittePage> {
           child: ListTile(
             onTap: () => _showDescription(
                 context,
+                map.keys.elementAt(index),
+                map.values.elementAt(index)['fullForm'],
                 map.values.elementAt(index)['about'],
                 map.values.elementAt(index)['agenda'],
                 map.values.elementAt(index)['poster'],
+                map.values.elementAt(index)['agendaPoster'],
+                map.values.elementAt(index)['ebPoster'],
                 size),
             contentPadding: EdgeInsets.only(
               top: 10.0,
@@ -139,9 +145,13 @@ class _CommittePageState extends State<CommittePage> {
 
   void _showDescription(
     context,
-    String description,
-    String agenda,
-    String poster,
+    String? committee,
+    String? fullForm,
+    String? description,
+    String? agenda,
+    String? committeePoster,
+    String? agendaPoster,
+    String? ebPoster,
     Size size,
   ) {
     bool display = false;
@@ -162,74 +172,142 @@ class _CommittePageState extends State<CommittePage> {
           constraints: BoxConstraints(
             maxHeight: size.height * 0.8,
           ),
-          child: SingleChildScrollView(
+          child: ListView(
             physics: BouncingScrollPhysics(),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 10.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 20.0,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: CachedNetworkImage(
-                      imageUrl: poster,
-                      height: size.height * 0.3,
-                      width: size.width,
-                      fit: BoxFit.fill,
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                    ),
+            children: <Widget>[
+              SizedBox(height: 10.0),
+              ListTile(
+                dense: true,
+                leading: Icon(
+                  FontAwesomeIcons.globe,
+                  color: Color(0xFFd4af37),
+                ),
+                title: Text(
+                  committee!,
+                  style: TextStyle(
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: accentColor,
                   ),
                 ),
-                SizedBox(height: 10.0),
-                display
-                    ? ListTile(
-                        leading: Icon(
-                          Icons.star,
-                          color: Color(0xFFd4af37),
-                        ),
-                        title: Text(
-                          "Agenda\n",
-                          style: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                        ),
-                        subtitle: Text(
-                          agenda + "\n",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 13.0,
-                          ),
-                        ),
-                        onTap: () => Navigator.of(context).pop(),
-                      )
-                    : SizedBox.shrink(),
-                ListTile(
-                  leading: Icon(
-                    Icons.book,
-                    color: Color(0xFFd4af37),
-                  ),
-                  title: Text(
-                    "About\n",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  subtitle: Text(
-                    description + "\n",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  onTap: () => Navigator.of(context).pop(),
+                subtitle: Text(fullForm!),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
                 ),
-                SizedBox(height: 10),
-              ],
-            ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl: committeePoster!,
+                    height: size.height * 0.3,
+                    width: size.width,
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              display
+                  ? ListTile(
+                      leading: Icon(
+                        Icons.star,
+                        color: Color(0xFFd4af37),
+                      ),
+                      title: Text(
+                        "Agenda\n",
+                        style: TextStyle(
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                          color: accentColor,
+                        ),
+                      ),
+                      subtitle: Text(
+                        agenda! + "\n",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 13.0,
+                        ),
+                      ),
+                      onTap: () => Navigator.of(context).pop(),
+                    )
+                  : SizedBox.shrink(),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl: agendaPoster!,
+                    height: size.height * 0.3,
+                    width: size.width,
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              ListTile(
+                leading: Icon(
+                  Icons.book,
+                  color: Color(0xFFd4af37),
+                ),
+                title: Text(
+                  "About\n",
+                  style: TextStyle(
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: accentColor,
+                  ),
+                ),
+                subtitle: Text(
+                  description! + "\n",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                  ),
+                ),
+                onTap: () => Navigator.of(context).pop(),
+              ),
+              SizedBox(height: 10),
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.book,
+                  color: Color(0xFFd4af37),
+                ),
+                title: Text(
+                  "Executive Board",
+                  style: TextStyle(
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: accentColor,
+                  ),
+                ),
+                onTap: () => Navigator.of(context).pop(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl: ebPoster!,
+                    height: size.height * 0.3,
+                    width: size.width,
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

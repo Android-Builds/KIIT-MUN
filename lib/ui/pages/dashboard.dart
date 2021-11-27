@@ -7,6 +7,8 @@ import 'package:mun/ui/pages/dashboard/contacts_page.dart';
 import 'package:mun/ui/pages/dashboard/schedule.dart';
 import 'package:mun/ui/widgets/app_drawer.dart';
 import 'package:mun/ui/pages/dashboard/home_page.dart';
+import 'package:mun/utils/constants.dart';
+import 'package:mun/utils/themes.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -15,9 +17,9 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
-  Connectivity connectivity;
+  late Connectivity connectivity;
   bool isOffline = false;
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
@@ -56,42 +58,45 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
+    darkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return isOffline
-        ? Scaffold(body: Connect(size: size))
-        : Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                'KIIT e-MUN',
-                style: TextStyle(
-                  fontSize: size.width * 0.045,
-                  fontWeight: FontWeight.bold,
+        ? SafeArea(child: Scaffold(body: Connect(size: size)))
+        : SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                  'KIIT e-MUN',
+                  style: TextStyle(
+                    fontSize: size.width * 0.045,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            drawer: AppDrawer(),
-            body: Center(
-              child: _widgetOptions.elementAt(_selectedIndex),
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.schedule),
-                  label: 'Schedule',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.contact_phone),
-                  label: 'Contacts',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.green[300],
-              onTap: _onItemTapped,
+              drawer: AppDrawer(),
+              body: Center(
+                child: _widgetOptions.elementAt(_selectedIndex),
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.schedule),
+                    label: 'Schedule',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.contact_phone),
+                    label: 'Contacts',
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                selectedItemColor: accentColor,
+                onTap: _onItemTapped,
+              ),
             ),
           );
   }

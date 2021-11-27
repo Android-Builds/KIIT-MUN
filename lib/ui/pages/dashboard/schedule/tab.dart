@@ -3,10 +3,10 @@ import 'package:mun/utils/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleTab extends StatefulWidget {
-  final Map event;
+  final Map? event;
   const ScheduleTab({
-    Key key,
-    @required this.event,
+    Key? key,
+    required this.event,
   }) : super(key: key);
   @override
   _ScheduleTabState createState() => _ScheduleTabState();
@@ -25,7 +25,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
 
   @override
   Widget build(BuildContext context) {
-    return eventList(widget.event);
+    return eventList(widget.event!);
   }
 
   Widget eventList(Map event) {

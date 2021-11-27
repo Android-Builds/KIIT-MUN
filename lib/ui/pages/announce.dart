@@ -67,8 +67,8 @@ class AnnounceLoader extends StatefulWidget {
 }
 
 class _AnnounceLoaderState extends State<AnnounceLoader> {
-  Connectivity connectivity;
-  StreamSubscription<ConnectivityResult> subscription;
+  late Connectivity connectivity;
+  late StreamSubscription<ConnectivityResult> subscription;
 
   @override
   void initState() {
@@ -103,7 +103,7 @@ class _AnnounceLoaderState extends State<AnnounceLoader> {
         : StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection('announce').snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) return Loader();
               var data = snapshot.data.docs.reversed.elementAt(0).data();
               return !data['isUpdated']

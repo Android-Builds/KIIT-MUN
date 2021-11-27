@@ -1,24 +1,63 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:mun/models/about.dart';
 
 DateTime now = new DateTime.now();
-DateTime eventDate = new DateTime(2021, 1, 29, 8);
-int days, hours, minutes, seconds;
+DateTime eventDate = new DateTime(2021, 12, 17, 8);
+int? days, hours, minutes, seconds;
 bool done = false;
+bool darkMode = false;
+Size size = new Size(0, 0);
 
 ValueNotifier valueNotifier = ValueNotifier(false);
 
 List<String> images = [
-  'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/carousel%2F2.jpg?alt=media&token=8f9a54e9-f1cc-458b-a9c8-380144dd22c7',
-  'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/carousel%2F6.jpg?alt=media&token=0b4391a2-b214-4bb2-8506-31139462e880',
-  'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/carousel%2FInternational-Flags.jpg?alt=media&token=50e08258-b315-40d9-8ef8-8d0dc49d2020',
+  '/assets/img/galleries/68486609_1171700466355347_2764202133791178752_o.jpg',
+  '/assets/img/galleries/69169850_1173642672827793_6279335701074935808_o.jpg',
+  '/assets/img/galleries/69388625_1171697006355693_1952834682173259776_o.jpg',
+  '/assets/img/galleries/70316786_1171571026368291_3552353685151416320_o.jpg',
+  '/assets/img/galleries/70398852_1171703746355019_2539602935080288256_o.jpg',
+  '/assets/img/galleries/70450172_1172522102939850_1429070601611378688_o.jpg',
+  '/assets/img/galleries/70459740_1171330109725716_4823369949831495680_o.jpg',
+  '/assets/img/galleries/70476482_1171681123023948_7081319641288540160_o.jpg',
+  '/assets/img/galleries/70477008_1171571706368223_9126131121120083968_o.jpg',
+  '/assets/img/galleries/70508047_1171319003060160_3026056248194760704_o.jpg',
+  '/assets/img/galleries/70598744_1171311306394263_4612954472593752064_o.jpg',
+  '/assets/img/galleries/70640297_1171332219725505_4889040850190860288_o.jpg',
+  '/assets/img/galleries/70663474_1172575182934542_7998864907871191040_o.jpg',
+  '/assets/img/galleries/70701613_1171603379698389_2184779550565597184_o.jpg',
+  '/assets/img/galleries/70720931_1171536346371759_352463016517697536_o.jpg',
+  '/assets/img/galleries/70725500_1172539126271481_5540165807889186816_o.jpg',
+  '/assets/img/galleries/70731207_1171576503034410_5513922539803377664_o.jpg',
+  '/assets/img/galleries/70746126_1172529812939079_474252474962673664_o.jpg',
+  '/assets/img/galleries/70762646_1171346293057431_642836237752729600_o.jpg',
+  '/assets/img/galleries/70831703_1174199259438801_2083087554063630336_o.jpg',
+  '/assets/img/galleries/70884794_1173600132832047_4645870582259253248_o.jpg',
+  '/assets/img/galleries/70896615_1171559193036141_6783838150394380288_o.jpg',
+  '/assets/img/galleries/70947614_1172577749600952_4591012283542405120_o.jpg',
+  '/assets/img/galleries/70954830_1171534803038580_5392270546081677312_o.jpg',
+  '/assets/img/galleries/71012628_1172589779599749_8606694589476110336_o.jpg',
+  '/assets/img/galleries/71015843_1171532759705451_1326261539950297088_o.jpg',
+  '/assets/img/galleries/71029007_1172526276272766_2183943436397182976_o.jpg',
+  '/assets/img/galleries/71030080_1171334259725301_7994853756309078016_o.jpg',
+  '/assets/img/galleries/71088605_1173817099477017_2834290133136572416_o.jpg',
+  '/assets/img/galleries/71119181_1172591226266271_2447258664315125760_o.jpg',
+  '/assets/img/galleries/71180504_1174165246108869_4234980037532581888_o.jpg',
+  '/assets/img/galleries/71189426_1171700973021963_5791812726355394560_o.jpg',
+  '/assets/img/galleries/71223095_1171700606355333_1998368512401211392_o.jpg',
+  '/assets/img/galleries/71239770_1171311503060910_5500455279004745728_o.jpg',
+  '/assets/img/galleries/71259051_1172789009579826_1273763592050573312_o.jpg',
+  '/assets/img/galleries/71767894_1171702999688427_7950864001183776768_o.jpg',
 ];
 
 String munLogo = 'assets/kiitMUN.png';
 
 String eMunBlack = 'assets/emun_black.png';
 
-String eMunWhite = 'assets/emun_white.jpg';
+String eMunWhite = 'assets/emun_white.png';
+
+String tagLine = '#ConcordToConquer';
 
 List<About> abouts = [
   new About(
@@ -57,9 +96,9 @@ List<About> abouts = [
         'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/about%2Fii.png?alt=media&token=63a0af24-c17f-427e-acde-13d9489e017b',
   ),
   new About(
-    name: 'Previous Version',
+    name: 'Previous Editions',
     description:
-        'KIIT International MUN has hosted a chain of successful editions since its maiden conference in 2013. Establishing the stronghold in its maiden year itself, KIITMUN was able to uphold the calibre of its diplomats and its commitment to making an impact, and since then the event has been setting the benchmark a little higher with every edition. The anticipation keeps escalating each year - starting with a few participants in 2013 to 2,500 in 2016 to over 2000 in 2019 - we have come a long way since. Our enormous world is divided by its selfish interests and we strive to make it smaller and united by bringing in participation from not just the renowned institutions and organizations of our nation, but from countries that span every corner of the world.\n\nIn its previous editions, KIIT International MUN had been graced by eminent personalities from all walks of life. It has been a stage for veteran comedians like Biswa Kalyan Rath, Kenny Sebastian,Rahul Subramanian and Abish Mathew shared at the same time by the likes of Mr. Kamal Singh, the Executive Director of UN Global Compact Network India; Allen Gammel OBE, Director of the British Council India; Padma Bhushan Mr. Rajat Sharma; Mr. Suhel Seth, distinguished Speaker and Actor; Mr. Akhilesh Yadav, Former Chief Minister, Uttar Pradesh; Debanjan Chakrabarti – Director British Council, East India; Mr. Punya Prasun Bajpai, the news anchor and executive editor at Aaj Tak, Mr. Hector Cueva Jacome, Ambassador of Ecuador in India; Mr. Fleming Raul Duarte Ramos, Ambassador of Paraguay to India; Mr. Claudio Ansorena Montero, Ambassador of Costa Rica to India and Mrs. Barbara Wickham, Director of British Council in India. Since its first edition, the popularity and significance of the conference have grown exponentially; hosting eminent personalities to conducting resourceful working shops, inclemently deliberating about global concerns for an entire day with representatives of other nations and dancing, singing and celebrating with the same people at the end of the day.\n\nKIIT International Model UN has successfully catered to diplomacy and merriment of the participants alike and has played such a pivotal role in bringing about a revolution in the Model United Nations circuit that the dilemmas that were dissected into by these young delegates seemed a bit more surmountable.',
+        'KIIT International MUN has been hosting a chain of successful editions since its inception in 2013. Having established the stronghold in its debut edition, KIIT MUN has been able to uphold the calibre of its diplomats and its commitment to making an impact, and ever since, the event has been setting a benchmark a little higher with every edition. The anticipation keeps escalating with each year and we have come a long way- starting with a meagre number of participants in 2013 to 2,500 in 2016, we kept things consistent and the growth static up till 2019 with the same enthusiasm. The enormous world is divided by its selfish interests and we strive to make it smaller, uniting it in the process through participation from not just the renowned institutions and organisations in our nation, but from countries and nations from every nook and corner of the world.\n\nIn its previous editions, KIIT International MUN, the largest MUN of its kind in South Asia, has been graced by the presence of eminent personalities who are renowned in all walks of life. KIIT International MUN has been a stage for various comedians like Bishwa Kalyan Rath, Kenny Sebastian, Rahul Subramanian, Abish Mathew, and Gaurav Kapur, the platform shared by the likes of Mr Kamal Singh, the Executive Director of UN Global Compact Network India, Allen Gammel OBE, Director of the British Council India, Debanjan Chakrabarti – Director British Council, East India, and by a plethora of foreign diplomats and emissaries like Mr Hector Cueva Jacome, Ambassador of Ecuador in India; Mr Fleming Raul Duarte Ramos, Ambassador of Paraguay to India; Mr Claudio Ansorena Montero, Ambassador of Costa Rica to India and Mrs Barbara Wickham, Director of British Council in India, political personalities like Akhilesh Yadav, and other distinguished speakers and diplomats. Since the very first edition, the significance and popularity of the conference have grown exponentially; hosting esteemed personalities to conduct resourceful workshops, deliberating about global concerns for an entire day with representatives of other nations and celebrating together through music and dance, amidst smiles. Even amidst the global pandemic, KIIT International MUN adapted to the virtual mode of organising the conference in 2021, successfully bringing together around 450 delegates from every nook and corner of the nation. Not letting the circumstances and the non-feasibility of organising the conference physically deter, KIIT International eMUN was made a success. From diplomats and dignitaries who graced the occasion virtually to a stand-up comedy show featuring Mr Gaurav Kapur, the spirit of MUN was upheld triumphantly.\n\nKIIT International Model United Nations has successfully catered to diplomacy and merriment of participants and has played a pivotal role in bringing about a revolution in the MUN circuit that the dilemmas that were dissected into by young delegates, seemed a bit more surmountable. With a beautiful legacy, KIIT International MUN looks forward to be organised with more devout enthusiasm and participation than ever before, taking into account each success, and looking out to ameliorate and uphold the very spirit of a united world.',
     imageUrl: '',
   ),
   new About(
@@ -69,4 +108,56 @@ List<About> abouts = [
     imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/mun_stuffs%2Fmun_society.jpg?alt=media&token=94fe10f8-2856-4114-96a3-f173f1a5c055',
   ),
+];
+
+const galleryList = [
+  '/assets/img/galleries/68486609_1171700466355347_2764202133791178752_o.jpg',
+  '/assets/img/galleries/69169850_1173642672827793_6279335701074935808_o.jpg',
+  '/assets/img/galleries/69388625_1171697006355693_1952834682173259776_o.jpg',
+//'/assets/img/galleries/70304577_1171536479705079_6276567749271486464_o.jpg',
+  '/assets/img/galleries/70316786_1171571026368291_3552353685151416320_o.jpg',
+  '/assets/img/galleries/70398852_1171703746355019_2539602935080288256_o.jpg',
+  '/assets/img/galleries/70450172_1172522102939850_1429070601611378688_o.jpg',
+  '/assets/img/galleries/70459740_1171330109725716_4823369949831495680_o.jpg',
+  '/assets/img/galleries/70476482_1171681123023948_7081319641288540160_o.jpg',
+  '/assets/img/galleries/70477008_1171571706368223_9126131121120083968_o.jpg',
+  '/assets/img/galleries/70508047_1171319003060160_3026056248194760704_o.jpg',
+  '/assets/img/galleries/70598744_1171311306394263_4612954472593752064_o.jpg',
+  '/assets/img/galleries/70640297_1171332219725505_4889040850190860288_o.jpg',
+  '/assets/img/galleries/70663474_1172575182934542_7998864907871191040_o.jpg',
+  '/assets/img/galleries/70701613_1171603379698389_2184779550565597184_o.jpg',
+  '/assets/img/galleries/70720931_1171536346371759_352463016517697536_o.jpg',
+  '/assets/img/galleries/70725500_1172539126271481_5540165807889186816_o.jpg',
+  '/assets/img/galleries/70731207_1171576503034410_5513922539803377664_o.jpg',
+  '/assets/img/galleries/70746126_1172529812939079_474252474962673664_o.jpg',
+  '/assets/img/galleries/70762646_1171346293057431_642836237752729600_o.jpg',
+//'/assets/img/galleries/70783643_1171324406392953_4981888692986576896_o.jpg',
+//'/assets/img/galleries/70788707_1174164629442264_4307940755818676224_o.jpg',
+//'/assets/img/galleries/70823062_1171342459724481_1465209762109980672_o.jpg',
+  '/assets/img/galleries/70831703_1174199259438801_2083087554063630336_o.jpg',
+//'/assets/img/galleries/70846880_1171563973035663_7420587766653648896_o.jpg',
+  '/assets/img/galleries/70884794_1173600132832047_4645870582259253248_o.jpg',
+  '/assets/img/galleries/70896615_1171559193036141_6783838150394380288_o.jpg',
+  '/assets/img/galleries/70947614_1172577749600952_4591012283542405120_o.jpg',
+  '/assets/img/galleries/70954830_1171534803038580_5392270546081677312_o.jpg',
+  '/assets/img/galleries/71012628_1172589779599749_8606694589476110336_o.jpg',
+  '/assets/img/galleries/71015843_1171532759705451_1326261539950297088_o.jpg',
+  '/assets/img/galleries/71029007_1172526276272766_2183943436397182976_o.jpg',
+  '/assets/img/galleries/71030080_1171334259725301_7994853756309078016_o.jpg',
+  '/assets/img/galleries/71088605_1173817099477017_2834290133136572416_o.jpg',
+  '/assets/img/galleries/71119181_1172591226266271_2447258664315125760_o.jpg',
+  '/assets/img/galleries/71180504_1174165246108869_4234980037532581888_o.jpg',
+  '/assets/img/galleries/71189426_1171700973021963_5791812726355394560_o.jpg',
+  '/assets/img/galleries/71223095_1171700606355333_1998368512401211392_o.jpg',
+  '/assets/img/galleries/71239770_1171311503060910_5500455279004745728_o.jpg',
+  '/assets/img/galleries/71259051_1172789009579826_1273763592050573312_o.jpg',
+//'/assets/img/galleries/71272240_1173611636164230_6031492470070575104_o.jpg',
+//'/assets/img/galleries/71350062_1172179692974091_8203118155011194880_o.jpg',
+//'/assets/img/galleries/71583941_1171545209704206_1120443511670308864_o.jpg',
+//'/assets/img/galleries/71645968_1172521726273221_4482618033524703232_o.jpg',
+//'/assets/img/galleries/71677626_1172499799608747_84683556642619392_o.jpg',
+//'/assets/img/galleries/71688298_1172499976275396_6410043001980059648_o.jpg',
+//'/assets/img/galleries/71715647_1171635909695136_4735296439926652928_o.jpg',
+  '/assets/img/galleries/71767894_1171702999688427_7950864001183776768_o.jpg',
+//'/assets/img/galleries/72113371_1173817186143675_6561523805565485056_o.jpg',
 ];
