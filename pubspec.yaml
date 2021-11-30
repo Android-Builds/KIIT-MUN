@@ -37,8 +37,10 @@ dependencies:
   font_awesome_flutter:
   lottie:
   flip_panel: ^1.0.1
+  shimmer:
 
   #pdf
+  syncfusion_flutter_pdf:
 
   #image
   carousel_slider:

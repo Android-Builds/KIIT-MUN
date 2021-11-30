@@ -33,6 +33,33 @@ class _DashBoardState extends State<DashBoard> {
     });
   }
 
+  Future<void> _showDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Star Performance',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: accentColor,
+            ),
+          ),
+          content: Text("Hello"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     connectivity = new Connectivity();
@@ -48,6 +75,7 @@ class _DashBoardState extends State<DashBoard> {
       }
     });
     super.initState();
+    Future(_showDialog);
   }
 
   @override

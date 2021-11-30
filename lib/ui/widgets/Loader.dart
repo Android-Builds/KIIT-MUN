@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 
@@ -16,7 +15,7 @@ class _LoaderState extends State<Loader> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            LottieBuilder.asset('assets/loader.json'),
+            Image.asset('assets/mun_loader.gif'),
             Text(
               'Loading...',
               style: TextStyle(
@@ -25,7 +24,6 @@ class _LoaderState extends State<Loader> {
                 color: accentColor,
               ),
             ),
-            //SizedBox(height:40),
             Text(
               tagLine,
               style: TextStyle(

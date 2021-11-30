@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +6,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
+import 'package:mun/ui/widgets/list_poster.dart';
+import 'package:mun/utils/themes.dart';
 
 class Agendas extends StatefulWidget {
   @override
@@ -14,15 +15,12 @@ class Agendas extends StatefulWidget {
 }
 
 class _AgendasState extends State<Agendas> {
-  Random random = Random();
-  int? i;
   late Connectivity connectivity;
   bool isOffline = false;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
-    i = (random.nextInt(2) + 2);
     connectivity = new Connectivity();
     _connectivitySubscription =
         connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
@@ -78,26 +76,32 @@ class _AgendasState extends State<Agendas> {
   agendaList(Map agendas, Size size) {
     return ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
+      physics: BouncingScrollPhysics(),
       itemCount: agendas.length,
       itemBuilder: (context, index) {
-        if (index == i) {
-          return SizedBox.shrink();
-        } else {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: CachedNetworkImage(
-                imageUrl: agendas['${index + 1}'],
-                placeholder: (context, url) => Container(
-                  alignment: Alignment.center,
-                  height: 200.0,
-                  child: CircularProgressIndicator(),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                '${index + 1}. ' +
+                    agendas['${index + 1}']
+                        .toString()
+                        .split('/')
+                        .last
+                        .split('.')
+                        .first,
+                style: TextStyle(
+                  fontSize: size.width * 0.05,
+                  color: accentColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-          );
-        }
+            ListPoster(imageUrl: agendas['${index + 1}']),
+          ],
+        );
       },
     );
   }

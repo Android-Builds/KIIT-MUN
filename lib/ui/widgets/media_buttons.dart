@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mun/utils/themes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MediaButtons extends StatelessWidget {
@@ -63,18 +64,15 @@ class MiniMediaButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final bool darkmode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return IconButton(
-        icon: Icon(
-          icon,
-          size: size.width * 0.07,
-          color: darkmode
-              ? Colors.white.withOpacity(0.4)
-              : Colors.black.withOpacity(0.4),
-        ),
-        onPressed: () async {
-          if (await canLaunch(url!)) launch(url!);
-        });
+      icon: Icon(
+        icon,
+        size: size.width * 0.07,
+        color: accentColor.withOpacity(0.7),
+      ),
+      onPressed: () async {
+        if (await canLaunch(url!)) launch(url!);
+      },
+    );
   }
 }

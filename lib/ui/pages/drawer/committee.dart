@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
+import 'package:mun/ui/widgets/custom_listtile.dart';
+import 'package:mun/ui/widgets/list_poster.dart';
+import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 
 class CommittePage extends StatefulWidget {
@@ -77,6 +81,7 @@ class _CommittePageState extends State<CommittePage> {
   Widget commiteeList(Map map, Size size) {
     return ListView.builder(
       controller: ScrollController(),
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.all(10.0),
       itemCount: map.length,
       itemBuilder: (context, index) {
@@ -105,7 +110,7 @@ class _CommittePageState extends State<CommittePage> {
             title: Text(
               map.keys.elementAt(index) + '\n',
               style: TextStyle(
-                color: Colors.green[300],
+                color: accentColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -119,21 +124,16 @@ class _CommittePageState extends State<CommittePage> {
                 SizedBox(height: 20.0),
                 Row(
                   children: [
-                    Text(
-                      'Level: ${map.values.elementAt(index)['level']}',
-                      style: TextStyle(fontSize: size.width * 0.03),
+                    infoTexts(
+                      'Level: ',
+                      map.values.elementAt(index)['level'],
                     ),
                     Spacer(),
-                    Text(
-                      'Delegate: ${map.values.elementAt(index)['delegate']}',
-                      style: TextStyle(fontSize: size.width * 0.03),
-                    ),
+                    infoTexts(
+                      'Delegate: ',
+                      map.values.elementAt(index)['delegate'],
+                    )
                   ],
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  'Max Allotment: ${map.values.elementAt(index)['maxAllotment']}',
-                  style: TextStyle(fontSize: size.width * 0.03),
                 ),
               ],
             ),
@@ -142,6 +142,26 @@ class _CommittePageState extends State<CommittePage> {
       },
     );
   }
+
+  Widget infoTexts(String title, String text) => RichText(
+        text: TextSpan(
+          //text: title,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1!
+              .copyWith(fontSize: size.width * 0.03),
+          children: <TextSpan>[
+            TextSpan(
+              text: title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: accentColor,
+              ),
+            ),
+            TextSpan(text: text),
+          ],
+        ),
+      );
 
   void _showDescription(
     context,
@@ -176,103 +196,26 @@ class _CommittePageState extends State<CommittePage> {
             physics: BouncingScrollPhysics(),
             children: <Widget>[
               SizedBox(height: 10.0),
-              ListTile(
-                dense: true,
-                leading: Icon(
-                  FontAwesomeIcons.globe,
-                  color: Color(0xFFd4af37),
-                ),
-                title: Text(
-                  committee!,
-                  style: TextStyle(
-                    fontSize: size.width * 0.05,
-                    fontWeight: FontWeight.bold,
-                    color: accentColor,
-                  ),
-                ),
-                subtitle: Text(fullForm!),
+              CustomListTile(
+                icon: FontAwesomeIcons.globe,
+                title: committee!,
+                text: fullForm!,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: committeePoster!,
-                    height: size.height * 0.3,
-                    width: size.width,
-                    fit: BoxFit.fill,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                  ),
-                ),
-              ),
+              ListPoster(imageUrl: committeePoster!),
               SizedBox(height: 10.0),
               display
-                  ? ListTile(
-                      leading: Icon(
-                        Icons.star,
-                        color: Color(0xFFd4af37),
-                      ),
-                      title: Text(
-                        "Agenda\n",
-                        style: TextStyle(
-                          fontSize: size.width * 0.05,
-                          fontWeight: FontWeight.bold,
-                          color: accentColor,
-                        ),
-                      ),
-                      subtitle: Text(
-                        agenda! + "\n",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 13.0,
-                        ),
-                      ),
-                      onTap: () => Navigator.of(context).pop(),
+                  ? CustomListTile(
+                      icon: Icons.star,
+                      title: 'Agenda',
+                      text: agenda!,
                     )
                   : SizedBox.shrink(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: agendaPoster!,
-                    height: size.height * 0.3,
-                    width: size.width,
-                    fit: BoxFit.fill,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                  ),
-                ),
-              ),
+              ListPoster(imageUrl: agendaPoster!),
               SizedBox(height: 10.0),
-              ListTile(
-                leading: Icon(
-                  Icons.book,
-                  color: Color(0xFFd4af37),
-                ),
-                title: Text(
-                  "About\n",
-                  style: TextStyle(
-                    fontSize: size.width * 0.05,
-                    fontWeight: FontWeight.bold,
-                    color: accentColor,
-                  ),
-                ),
-                subtitle: Text(
-                  description! + "\n",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                  ),
-                ),
-                onTap: () => Navigator.of(context).pop(),
+              CustomListTile(
+                icon: Icons.book,
+                title: 'About',
+                text: description!,
               ),
               SizedBox(height: 10),
               ListTile(
@@ -290,23 +233,7 @@ class _CommittePageState extends State<CommittePage> {
                 ),
                 onTap: () => Navigator.of(context).pop(),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: ebPoster!,
-                    height: size.height * 0.3,
-                    width: size.width,
-                    fit: BoxFit.fill,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                  ),
-                ),
-              ),
+              ListPoster(imageUrl: ebPoster!),
             ],
           ),
         );

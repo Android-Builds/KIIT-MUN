@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/utils/constants.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Carousel extends StatelessWidget {
   const Carousel({Key? key}) : super(key: key);
@@ -33,8 +34,15 @@ class Carousel extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: 'https://kiitmun.org$i',
                   fit: BoxFit.cover,
-                  progressIndicatorBuilder: (context, url, progress) => Center(
-                    child: CircularProgressIndicator(),
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      Shimmer.fromColors(
+                    child: Container(
+                      height: size.width * 0.9,
+                      width: size.width,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    baseColor: Theme.of(context).scaffoldBackgroundColor,
+                    highlightColor: Colors.grey,
                   ),
                 ),
               );

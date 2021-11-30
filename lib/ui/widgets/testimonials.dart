@@ -110,6 +110,7 @@ class Testimonials extends StatelessWidget {
                             SizedBox(height: 20.0),
                             RichText(
                               textAlign: TextAlign.center,
+                              maxLines: 2,
                               text: TextSpan(
                                 text: members.values.elementAt(index)['name'] +
                                     '\n',

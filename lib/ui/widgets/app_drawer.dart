@@ -24,13 +24,12 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(35.0),
             height: size.height * 0.4,
             width: size.width,
-            color: darkMode ? Colors.white : Colors.black,
+            color: !darkMode ? Colors.white : Colors.black,
             child: Image.asset(
-              darkMode ? '$eMunBlack' : '$eMunWhite',
-              fit: BoxFit.cover,
+              !darkMode ? '$eMunBlack' : '$eMunWhite',
+              fit: BoxFit.contain,
             ),
           ),
           !done
