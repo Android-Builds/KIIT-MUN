@@ -38,20 +38,14 @@ class Credits extends StatelessWidget {
       children: <Widget>[
         SizedBox(height: 10),
         Text(
-          'Developed By : ',
+          'An app by KIIT MUN Society',
           style: textStyle,
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 10),
         Column(
           children: <Widget>[
-            CircleAvatar(
-              radius: size.width * 0.2,
-              backgroundImage: AssetImage('assets/debjit.jpg'),
-            ),
-            SizedBox(height: 40),
             Text(
-              'Debjit Chakraborty',
+              'Developed by: \n\nDebjit Chakraborty',
               style: textStyle,
               textAlign: TextAlign.center,
             ),
@@ -108,7 +102,7 @@ class Credits extends StatelessWidget {
           height: 30,
         ),
         Text(
-          'App Version : 1.0.0\n\u00a9 KIIT eMUN',
+          'App Version : 2.0.0\n\u00a9 KIIT MUN',
           style: textStyle2,
           textAlign: TextAlign.center,
         ),

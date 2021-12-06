@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mun/ui/pages/drawer/pdf_viewer/view_pdf.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
+import 'package:mun/utils/themes.dart';
 
 class StudyGuide extends StatefulWidget {
   @override
@@ -74,19 +75,26 @@ class _StudyGuideState extends State<StudyGuide> {
 
   Widget commiteeList(Map map, Size size) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       controller: ScrollController(),
       padding: EdgeInsets.all(10.0),
       itemCount: map.length,
       itemBuilder: (context, index) {
         return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           child: ListTile(
             onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ViewPdf(
-                          url: map.values.elementAt(index)['docUrl'],
-                          name: map.values.elementAt(index)['name'],
-                        ))),
+              context,
+              MaterialPageRoute(
+                builder: (context) => ViewPdf(
+                  url: 'https://kiitmun.org/study_docs/' +
+                      map.values.elementAt(index)['docUrl'],
+                  name: map.values.elementAt(index)['name'],
+                ),
+              ),
+            ),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 30.0,
               vertical: 10.0,
@@ -95,7 +103,7 @@ class _StudyGuideState extends State<StudyGuide> {
             title: Text(
               map.values.elementAt(index)['name'],
               style: TextStyle(
-                color: Colors.green[300],
+                color: accentColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

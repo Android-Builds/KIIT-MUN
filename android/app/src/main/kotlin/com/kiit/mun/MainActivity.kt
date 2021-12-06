@@ -1,4 +1,4 @@
-package org.kiit.mun
+package com.kiit.mun
 
 import io.flutter.embedding.android.FlutterActivity
 

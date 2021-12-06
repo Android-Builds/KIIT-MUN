@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "141960908276",
+    "firebase_url": "https://kiit-mun-15f26-default-rtdb.firebaseio.com",
     "project_id": "kiit-mun-15f26",
     "storage_bucket": "kiit-mun-15f26.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141960908276:android:da5fc68a8e52b3e7b97da1",
+        "android_client_info": {
+          "package_name": "com.kiit.mun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141960908276-94g92rd6cq1hgecdg8h6i07be5mhaodb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQNqlABbxUAaEvmUCqahdDPD93Lo4WuGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141960908276-94g92rd6cq1hgecdg8h6i07be5mhaodb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:141960908276:android:491b829bc84fdb77b97da1",

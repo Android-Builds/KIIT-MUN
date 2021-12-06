@@ -63,7 +63,7 @@ class Testimonials extends StatelessWidget {
         } else if (snapshot.hasData) {
           Map members = snapshot.data.docs[0].data();
           return SizedBox(
-            height: size.height * 0.25,
+            height: size.height * 0.28,
             child: ListView.builder(
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
@@ -82,8 +82,8 @@ class Testimonials extends StatelessWidget {
                       horizontal: 5.0,
                       vertical: 10.0,
                     ),
-                    height: size.height * 0.2,
-                    width: size.width * 0.4,
+                    height: size.height * 0.3,
+                    width: size.width * 0.45,
                     child: Card(
                       elevation: 8.0,
                       shape: RoundedRectangleBorder(
@@ -95,11 +95,11 @@ class Testimonials extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CircleAvatar(
-                              radius: 35.5,
+                              radius: 42.5,
                               backgroundColor:
                                   darkMode ? Colors.white : Colors.black,
                               child: CircleAvatar(
-                                radius: 35.0,
+                                radius: 42.0,
                                 backgroundColor:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 backgroundImage: CachedNetworkImageProvider(
@@ -114,9 +114,11 @@ class Testimonials extends StatelessWidget {
                               text: TextSpan(
                                 text: members.values.elementAt(index)['name'] +
                                     '\n',
-                                style: DefaultTextStyle.of(context)
-                                    .style
-                                    .copyWith(fontSize: size.width * 0.035),
+                                style:
+                                    DefaultTextStyle.of(context).style.copyWith(
+                                          fontSize: size.width * 0.035,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: members.values

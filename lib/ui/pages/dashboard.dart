@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
@@ -9,6 +10,7 @@ import 'package:mun/ui/widgets/app_drawer.dart';
 import 'package:mun/ui/pages/dashboard/home_page.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -46,7 +48,34 @@ class _DashBoardState extends State<DashBoard> {
               color: accentColor,
             ),
           ),
-          content: Text("Hello"),
+          content: Container(
+            height: size.height * 0.3,
+            child: Column(
+              children: [
+                Text('Don\'t miss it. 18th December. Mark your calenders !'),
+                Spacer(),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://kiitmun.org/dev/assets/img/carousel/carousel8.jpg',
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      child: Container(
+                        height: size.height * 0.24,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      baseColor: Colors.grey,
+                      highlightColor: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           actions: <Widget>[
             TextButton(
               child: const Text('Close'),
