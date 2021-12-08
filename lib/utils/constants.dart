@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:mun/models/about.dart';
 
+//DateTime now = new DateTime.now();
+//DateTime eventDate = new DateTime(2021, 12, 17, 8);
 DateTime now = new DateTime.now();
-DateTime eventDate = new DateTime(2021, 12, 17, 8);
+DateTime eventDate = DateTime.parse('2021-12-17 10:00:00.00');
 int? days, hours, minutes, seconds;
 bool done = false;
 bool darkMode = false;

@@ -39,10 +39,10 @@ class MediaButtons extends StatelessWidget {
             width: size.width * 0.15,
             height: size.width * 0.15,
             decoration: BoxDecoration(
+              shape: BoxShape.circle,
               color: darkmode
                   ? Colors.white.withOpacity(0.15)
                   : Colors.black.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(20.0),
             ),
           ),
         ],

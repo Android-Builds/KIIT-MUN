@@ -66,7 +66,7 @@ class _GalleryState extends State<Gallery> {
         physics: BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return ListPoster(
-            imageUrl: 'https://kiitmun.org/${galleryList[index]}',
+            imageUrl: 'https://kiitmun.org${galleryList[index]}',
           );
         },
       ),

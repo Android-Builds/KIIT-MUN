@@ -6,11 +6,7 @@ import 'package:mun/utils/themes.dart';
 
 initTime() {
   now = DateTime.now();
-  days = eventDate.difference(now).inDays;
-  hours = eventDate.difference(now).inHours % 24;
-  minutes = eventDate.difference(now).inMinutes % 60;
-  seconds = eventDate.difference(now).inSeconds % 60;
-  if (days! < 0 && hours! < 0 && minutes! < 0 && seconds! < 0) done = true;
+  if (now.compareTo(eventDate) > 0) done = true;
 }
 
 void main() async {

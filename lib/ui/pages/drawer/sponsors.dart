@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/ui/widgets/Loader.dart';
+import 'package:mun/ui/widgets/flip_tile.dart';
 import 'package:mun/ui/widgets/updated.dart';
 import '../../widgets/connectInternet.dart';
 import 'package:connectivity/connectivity.dart';
@@ -97,12 +98,11 @@ class _LoadSponsorsState extends State<LoadSponsors> {
           margin: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          child: CachedNetworkImage(
-            imageUrl: sponsors['${index + 1}'],
-            placeholder: (context, url) =>
-                Center(child: CircularProgressIndicator()),
+          child: FlipTile(
+            imageUrl: sponsors['${index + 1}']['logo'],
+            type: sponsors['${index + 1}']['type'],
           ),
         );
       }),

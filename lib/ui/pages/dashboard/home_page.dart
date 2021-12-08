@@ -84,12 +84,7 @@ class _HomePageState extends State<HomePage> {
             done = true;
             setState(() {});
           },
-          duration: Duration(
-            days: days!,
-            hours: hours!,
-            minutes: minutes!,
-            seconds: seconds!,
-          ),
+          duration: eventDate.difference(now),
           spacing: EdgeInsets.symmetric(
             vertical: 5.0,
             horizontal: 2.0,
