@@ -31,6 +31,10 @@ dependencies:
   #firebase
   firebase_core:
   cloud_firestore:
+  firebase_messaging: ^11.2.1
+
+  #notification
+  flutter_local_notifications: ^9.1.4
 
   #decoratives
   google_fonts:

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
 import 'package:mun/ui/pages/dashboard/contacts_page.dart';
@@ -38,7 +39,7 @@ class _DashBoardState extends State<DashBoard> {
   Future<void> _showDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
