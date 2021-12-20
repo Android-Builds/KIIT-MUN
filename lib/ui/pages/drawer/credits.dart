@@ -84,8 +84,8 @@ class Credits extends StatelessWidget {
                 IconButton(
                   icon: Icon(FontAwesomeIcons.instagram),
                   onPressed: () async {
-                    var url = 'instagram://user?username=reverse_parameter';
-                    var url2 = 'https://www.instagram.com/reverse_parameter/';
+                    var url = 'instagram://user?username=de.ch_';
+                    var url2 = 'https://www.instagram.com/de.ch_/';
                     if (await canLaunch(url))
                       launch(url);
                     else if (await canLaunch(url2))
@@ -102,7 +102,7 @@ class Credits extends StatelessWidget {
           height: 30,
         ),
         Text(
-          'App Version : 2.0.0\n\u00a9 KIIT MUN',
+          'App Version : 2.1.0\n\u00a9 KIIT MUN',
           style: textStyle2,
           textAlign: TextAlign.center,
         ),

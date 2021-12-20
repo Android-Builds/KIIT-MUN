@@ -11,6 +11,7 @@ import 'package:mun/ui/pages/drawer/sponsors.dart';
 import 'package:mun/ui/pages/drawer/study_guide.dart';
 import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/utils/constants.dart';
+import 'package:mun/utils/themes.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -69,6 +70,8 @@ class AppDrawer extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 ExpansionTile(
+                  textColor: accentColor,
+                  iconColor: accentColor,
                   title: Text('Committees', style: drawerStyle),
                   children: [
                     CardListTile(
@@ -78,24 +81,24 @@ class AppDrawer extends StatelessWidget {
                   ],
                 ),
                 CardListTile(title: 'Executive Board', path: ExecutiveBoard()),
-                CardListTile(title: 'Partners', path: Partners()),
+                CardListTile(title: 'Collaborators', path: Partners()),
                 CardListTile(title: 'Sponsors', path: Sponsors()),
+                CardListTile(title: 'Gallery', path: Gallery()),
                 ExpansionTile(
+                  textColor: accentColor,
+                  iconColor: accentColor,
                   title: Text('About', style: drawerStyle),
                   children: List.generate(
                     abouts.length,
                     (index) {
                       return CardListTile(
                         title: abouts[index].name,
-                        path: AboutPage(
-                          index: index,
-                        ),
+                        path: AboutPage(index: index),
                       );
                     },
                   ),
                 ),
                 CardListTile(title: 'Credits', path: Credits()),
-                CardListTile(title: 'Gallery', path: Gallery()),
               ],
             ),
           ),

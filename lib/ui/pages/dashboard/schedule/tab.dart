@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mun/utils/functions.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleTab extends StatefulWidget {
   final Map? event;
@@ -29,7 +27,9 @@ class _ScheduleTabState extends State<ScheduleTab> {
   }
 
   Widget eventList(Map event) {
+    print(event['1']['endTime']);
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.all(10.0),
       itemCount: event.length,
       itemBuilder: (context, index) {
@@ -49,36 +49,10 @@ class _ScheduleTabState extends State<ScheduleTab> {
                   ),
                 ),
                 subtitle: Text(
-                  event.keys.elementAt(index),
+                  event['${index + 1}']['event'],
                   style: TextStyle(
                     fontSize: 13.0,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ListTile(
-                onTap: () async {
-                  var url = event.values.elementAt(0).values.elementAt(2);
-                  if (await canLaunch(url))
-                    launch(url);
-                  else
-                    launchError(context);
-                },
-                leading: Icon(
-                  Icons.navigation,
-                  color: Colors.green,
-                ),
-                title: Text(
-                  'Join event',
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(
-                  'Tap to join',
-                  style: TextStyle(
-                    fontSize: 11.0,
                   ),
                 ),
               ),
@@ -95,9 +69,9 @@ class _ScheduleTabState extends State<ScheduleTab> {
                   ),
                 ),
                 subtitle: Text(
-                  event.values.elementAt(0).values.elementAt(0) +
+                  event['${index + 1}']['startTime'] +
                       ' - ' +
-                      event.values.elementAt(0).values.elementAt(1),
+                      event['${index + 1}']['endTime'],
                   style: TextStyle(
                     fontSize: 13.0,
                     fontWeight: FontWeight.bold,

@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/updated.dart';
+import 'package:mun/utils/constants.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../widgets/connectInternet.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -17,7 +19,7 @@ class Partners extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Partners',
+          'Collaborators',
           style: TextStyle(
             fontSize: size.width * 0.04,
             fontWeight: FontWeight.bold,
@@ -87,24 +89,40 @@ class _LoadPartnersState extends State<LoadPartners> {
   }
 
   partnerList(Map partners) {
-    final size = MediaQuery.of(context).size;
     return ListView.builder(
-      itemCount: partners.length,
-      itemBuilder: (context, index) => Container(
-        height: size.height * 0.25,
-        margin: EdgeInsets.symmetric(
-          horizontal: 100.0,
-          vertical: 10.0,
-        ),
-        padding: EdgeInsets.all(30.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: CachedNetworkImage(
-          imageUrl: partners.values.elementAt(index),
-        ),
-      ),
+      physics: BouncingScrollPhysics(),
+      itemCount: partners.values.length,
+      itemBuilder: (context, index) {
+        return Container(
+          padding: EdgeInsets.all(10.0),
+          margin: EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 10.0,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: CachedNetworkImage(
+              imageUrl: partners.values.elementAt(index),
+              placeholder: (context, url) => Shimmer.fromColors(
+                child: Container(
+                  height: size.height * 0.32,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                baseColor: Colors.grey,
+                highlightColor: Theme.of(context).scaffoldBackgroundColor,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

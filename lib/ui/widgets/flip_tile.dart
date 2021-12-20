@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +77,7 @@ class _FlipTileState extends State<FlipTile> {
 
   Widget _buildFront() {
     return Container(
-      height: size.height * 0.2,
+      height: size.height * 0.3,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15.0),
@@ -94,15 +93,15 @@ class _FlipTileState extends State<FlipTile> {
   Widget _buildRear() {
     return __buildLayout(
       key: ValueKey(false),
-      backgroundColor: Colors.blue,
-      faceName: "Rear",
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: ColorFiltered(
           colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),
           child: Center(
-              child: Text(widget.type,
-                  style: TextStyle(fontSize: 50.0, color: Colors.black))),
+              child: Text(
+            widget.type,
+            style: TextStyle(fontSize: 50.0, color: Colors.black),
+          )),
         ),
       ),
     );
@@ -111,24 +110,23 @@ class _FlipTileState extends State<FlipTile> {
   Widget __buildLayout({
     required Key key,
     required Widget child,
-    required String faceName,
-    required Color backgroundColor,
   }) {
     return Container(
-      key: key,
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(20.0),
-        color: Colors.black,
-      ),
-      child: Center(
-        child: Text(widget.type,
-            style: TextStyle(
-              fontSize: size.width * 0.04,
-              fontWeight: FontWeight.bold,
-            )),
-      ),
-    );
+        key: key,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(20.0),
+          color: Colors.black,
+        ),
+        child: Center(
+            child: Text(
+          widget.type,
+          style: TextStyle(
+            fontSize: size.width * 0.04,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        )));
   }
 }

@@ -16,6 +16,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     titleTextStyle: TextStyle(color: Colors.black),
   ),
   tabBarTheme: TabBarTheme(
+    unselectedLabelStyle: fontStyle,
     labelStyle: fontStyle.copyWith(color: Colors.black),
     labelColor: accentColor,
     unselectedLabelColor: Colors.black,
@@ -46,6 +47,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     iconTheme: iconTheme,
   ),
   tabBarTheme: TabBarTheme(
+    unselectedLabelStyle: fontStyle,
     labelStyle: fontStyle,
     labelColor: accentColor,
     unselectedLabelColor: Colors.white,

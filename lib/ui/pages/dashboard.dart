@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
 import 'package:mun/ui/pages/dashboard/contacts_page.dart';
 import 'package:mun/ui/pages/dashboard/schedule.dart';
@@ -23,6 +25,7 @@ class _DashBoardState extends State<DashBoard> {
   late Connectivity connectivity;
   bool isOffline = false;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  CollectionReference tokens = FirebaseFirestore.instance.collection('tokens');
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
@@ -36,12 +39,101 @@ class _DashBoardState extends State<DashBoard> {
     });
   }
 
+  generateNotifications(RemoteMessage message) async {
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'high_importance_channel', // id
+      'High Importance Notifications', // title
+      description:
+          'This channel is used for important notifications.', // description
+      importance: Importance.high,
+      playSound: true,
+      enableVibration: true,
+    );
+
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
+    var initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    RemoteNotification? notification = message.notification;
+    AndroidNotification? android = message.notification?.android;
+
+    if (notification != null && android != null) {
+      flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            icon: 'app_icon',
+            enableVibration: true,
+            playSound: true,
+            enableLights: true,
+            ongoing: false,
+            importance: Importance.high,
+            priority: Priority.high,
+            visibility: NotificationVisibility.public,
+            channelShowBadge: true,
+            showWhen: true,
+            // other properties...
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> showPopup(RemoteMessage message, BuildContext context) {
+    RemoteNotification? notification = message.notification;
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(notification!.title!),
+          content: Text(notification.body!),
+          actions: [
+            TextButton(
+              child: Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  initFirebaseMessaging(BuildContext context) {
+    FirebaseMessaging.instance.getToken();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      showPopup(message, context);
+      generateNotifications(message);
+    });
+  }
+
   Future<void> _showDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           title: Text(
             'Star Performance',
             style: TextStyle(
@@ -53,8 +145,6 @@ class _DashBoardState extends State<DashBoard> {
             height: size.height * 0.3,
             child: Column(
               children: [
-                Text('Don\'t miss it. 18th December. Mark your calenders !'),
-                Spacer(),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: CachedNetworkImage(
@@ -72,6 +162,14 @@ class _DashBoardState extends State<DashBoard> {
                       baseColor: Colors.grey,
                       highlightColor: Theme.of(context).scaffoldBackgroundColor,
                     ),
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '18th December. Mark your calenders !',
+                  style: TextStyle(
+                    fontSize: size.width * 0.035,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -104,6 +202,7 @@ class _DashBoardState extends State<DashBoard> {
         setState(() {});
       }
     });
+    initFirebaseMessaging(context);
     super.initState();
     Future(_showDialog);
   }

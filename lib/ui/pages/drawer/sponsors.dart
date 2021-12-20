@@ -86,16 +86,16 @@ class _LoadSponsorsState extends State<LoadSponsors> {
   }
 
   sponsorList(Map sponsors) {
-    return GridView.count(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 10.0,
-      ),
-      crossAxisCount: 2,
-      children: List.generate(sponsors.length, (index) {
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      itemCount: sponsors.length,
+      itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.all(10.0),
-          margin: EdgeInsets.all(10.0),
+          margin: EdgeInsets.symmetric(
+            horizontal: 30.0,
+            vertical: 10.0,
+          ),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20.0),
@@ -105,7 +105,7 @@ class _LoadSponsorsState extends State<LoadSponsors> {
             type: sponsors['${index + 1}']['type'],
           ),
         );
-      }),
+      },
     );
   }
 }
