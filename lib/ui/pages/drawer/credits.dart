@@ -45,7 +45,7 @@ class Credits extends StatelessWidget {
         Column(
           children: <Widget>[
             Text(
-              'Developed by: \n\nDebjit Chakraborty',
+              'Developed by: \n\nShashank Deepak \n Web and App Team',
               style: textStyle,
               textAlign: TextAlign.center,
             ),
@@ -57,39 +57,23 @@ class Credits extends StatelessWidget {
                   icon: Icon(FontAwesomeIcons.linkedin),
                   onPressed: () {
                     launch(
-                        'https://www.linkedin.com/in/debjit-chakraborty-42a64317a/');
+                        'https://www.linkedin.com/in/shashank-deepak-08488922b');
                   },
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 20,
                 ),
                 IconButton(
                   icon: Icon(FontAwesomeIcons.mailBulk),
                   onPressed: () async {
                     final Uri _emailLaunchUri = Uri(
                       scheme: 'mailto',
-                      path: 'zxyron0@gmail.com',
-                      queryParameters: {'subject': 'Problem is KIIT MUN app!'},
+                      path: 'shashankdeepak3@gmail.com',
+                      queryParameters: {'subject': 'Problem in KIIT MUN app!'},
                     );
                     var url = _emailLaunchUri.toString();
                     if (await canLaunch(url))
                       await launch(url);
-                    else
-                      launchError(context);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                IconButton(
-                  icon: Icon(FontAwesomeIcons.instagram),
-                  onPressed: () async {
-                    var url = 'instagram://user?username=de.ch_';
-                    var url2 = 'https://www.instagram.com/de.ch_/';
-                    if (await canLaunch(url))
-                      launch(url);
-                    else if (await canLaunch(url2))
-                      launch(url2);
                     else
                       launchError(context);
                   },
@@ -102,7 +86,7 @@ class Credits extends StatelessWidget {
           height: 30,
         ),
         Text(
-          'App Version : 2.1.0\n\u00a9 KIIT MUN',
+          'App Version : 2.2.0\n\u00a9 KIIT MUN',
           style: textStyle2,
           textAlign: TextAlign.center,
         ),

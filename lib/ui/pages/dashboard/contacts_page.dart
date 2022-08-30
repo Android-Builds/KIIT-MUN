@@ -1,10 +1,33 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+List<String> names = [
+  "SAGNIK GHOSH",
+  "MANAS MISHRA",
+  "RHEA SINHA",
+  "SURARCHI KUMAR",
+  "OM CHAITANYA"
+];
+
+List<String> phoneNumber = [
+  "8144021921",
+  "6394324923",
+  "8557912643",
+  "8260010846",
+  "9955818809"
+];
+
+// List<String> images = [
+//   "https://kiitmun.org/assets/img/members/sagnik-ghosh.png",
+//   "https://kiitmun.org/assets/img/members/manas-mishra.png",
+//   "https://kiitmun.org/assets/img/members/rhea-sinha.png",
+//   "https://kiitmun.org/assets/img/members/surarchi-kumar.png",
+//   "https://kiitmun.org/assets/img/members/om-chaitanya.png",
+// ];
 
 class ContactsPage extends StatelessWidget {
   @override
@@ -53,64 +76,63 @@ class ContactsPage extends StatelessWidget {
 
   Widget contactList(Map members, Size size) {
     return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: members.length,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: EdgeInsets.all(5.0),
-          margin: EdgeInsets.all(20.0),
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 35.5,
-                backgroundColor: darkMode ? Colors.white : Colors.black,
-                child: CircleAvatar(
-                  radius: 35.0,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  backgroundImage: CachedNetworkImageProvider(
-                      members.values.elementAt(index)['imageUrl']),
-                ),
-              ),
-              SizedBox(width: 30.0),
-              RichText(
-                text: TextSpan(
-                  text: members.values.elementAt(index)['name'] + '\n',
-                  style: DefaultTextStyle.of(context).style.copyWith(
-                        fontSize: size.width * 0.035,
-                      ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: members.values.elementAt(index)['designation'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: size.width * 0.028,
-                        color: Colors.red[300],
-                      ),
+        physics: BouncingScrollPhysics(),
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: EdgeInsets.all(5.0),
+            margin: EdgeInsets.all(20.0),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 35.5,
+                  backgroundColor: darkMode ? Colors.white : Colors.black,
+                  child: CircleAvatar(
+                    radius: 35.0,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundImage: NetworkImage(
+                      imagesOfTop5[index],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Spacer(),
-              IconButton(
-                color: Colors.green,
-                icon: Icon(
-                  Icons.call,
-                  size: size.width * 0.06,
+                SizedBox(width: 30.0),
+                RichText(
+                  text: TextSpan(
+                    text: names[index] + '\n',
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                          fontSize: size.width * 0.035,
+                        ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: members.values.elementAt(index)['designation'],
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.028,
+                          color: Colors.red[300],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                onPressed: () async {
-                  String url =
-                      'tel:${members.values.elementAt(index)['phone']}';
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-              )
-            ],
-          ),
-        );
-      },
-    );
+                Spacer(),
+                IconButton(
+                  color: Colors.green,
+                  icon: Icon(
+                    Icons.call,
+                    size: size.width * 0.06,
+                  ),
+                  onPressed: () async {
+                    String url = 'tel:+91${phoneNumber[index]}';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                )
+              ],
+            ),
+          );
+        });
   }
 }

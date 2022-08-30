@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mun/ui/widgets/announcewidget.dart';
 import 'package:mun/ui/widgets/carousel.dart';
 import 'package:mun/ui/widgets/customFlipPanel.dart';
+import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/ui/widgets/munwidget.dart';
 import 'package:mun/ui/widgets/overlaycarousel.dart';
 import 'package:mun/ui/widgets/testimonials.dart';
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ),
           !done ? timerWidgets() : AnnounceWidget(),
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 30.0,
               vertical: 20.0,
             ),
@@ -61,6 +63,34 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Testimonials(),
+          Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MediaButtons(
+                  icon: FontAwesomeIcons.facebookF,
+                  url: 'https://www.facebook.com/kiitmun',
+                ),
+                MediaButtons(
+                  icon: FontAwesomeIcons.instagram,
+                  url: 'https://www.instagram.com/instakiitmun/',
+                ),
+                MediaButtons(
+                  icon: FontAwesomeIcons.twitter,
+                  url: 'https://twitter.com/kiitmun?s=08',
+                ),
+                MediaButtons(
+                  icon: FontAwesomeIcons.linkedinIn,
+                  url: 'https://www.linkedin.com/in/kiitmun',
+                ),
+                MediaButtons(
+                  icon: FontAwesomeIcons.globe,
+                  url: 'https://kiitmun.org/',
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

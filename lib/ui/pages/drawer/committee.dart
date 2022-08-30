@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mun/ui/pages/dashboard/contacts_page.dart';
 import 'package:mun/ui/widgets/Loader.dart';
 import 'package:mun/ui/widgets/connectInternet.dart';
 import 'package:mun/ui/widgets/custom_list_tile.dart';
@@ -82,32 +83,35 @@ class _CommittePageState extends State<CommittePage> {
       controller: ScrollController(),
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.all(10.0),
-      itemCount: map.length,
+      itemCount: committeeNames.length,
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
             onTap: () => _showDescription(
-                context,
-                map.keys.elementAt(index),
-                map.values.elementAt(index)['fullForm'],
-                map.values.elementAt(index)['about'],
-                map.values.elementAt(index)['agenda'],
-                map.values.elementAt(index)['poster'],
-                map.values.elementAt(index)['agendaPoster'],
-                map.values.elementAt(index)['ebPoster'],
-                size),
+              context,
+              committeeNames[index],
+              fullForms[index],
+              committeeImage[index],
+              agenda[index],
+              eb[index],
+              size,
+            ),
             contentPadding: EdgeInsets.only(
               top: 10.0,
               bottom: 10.0,
               right: 15.0,
             ),
-            leading: CachedNetworkImage(
-              imageUrl: map.values.elementAt(index)['logo'],
-              height: size.width * 0.2,
-              width: size.width * 0.2,
+            leading: Container(
+              decoration: BoxDecoration(
+                  // border: Border.all(),
+                  ),
+              child: Image.asset(
+                logo[index],
+                fit: BoxFit.cover,
+              ),
             ),
             title: Text(
-              map.keys.elementAt(index) + '\n',
+              committeeNames[index] + '\n',
               style: TextStyle(
                 color: accentColor,
                 fontWeight: FontWeight.bold,
@@ -117,7 +121,7 @@ class _CommittePageState extends State<CommittePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  map.values.elementAt(index)['fullForm'],
+                  fullForms[index],
                   style: TextStyle(fontSize: size.width * 0.033),
                 ),
                 SizedBox(height: 20.0),
@@ -125,12 +129,12 @@ class _CommittePageState extends State<CommittePage> {
                   children: [
                     infoTexts(
                       'Level: ',
-                      map.values.elementAt(index)['level'],
+                      level[index],
                     ),
                     Spacer(),
                     infoTexts(
                       'Delegate: ',
-                      map.values.elementAt(index)['delegate'],
+                      delegate[index],
                     )
                   ],
                 ),
@@ -166,17 +170,16 @@ class _CommittePageState extends State<CommittePage> {
     context,
     String? committee,
     String? fullForm,
-    String? description,
-    String? agenda,
+
+    // String? description,
+    // String? agenda,
     String? committeePoster,
     String? agendaPoster,
     String? ebPoster,
     Size size,
   ) {
     bool display = false;
-    if (agenda != '') {
-      display = true;
-    }
+
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -200,22 +203,26 @@ class _CommittePageState extends State<CommittePage> {
                 title: committee!,
                 text: fullForm!,
               ),
-              ListPoster(imageUrl: committeePoster!),
+              ListPoster(
+                imageUrl: committeePoster!,
+              ),
               SizedBox(height: 10.0),
-              display
+              committee != "IP"
                   ? CustomListTile(
                       icon: Icons.star,
                       title: 'Agenda',
-                      text: agenda!,
+                      text: "",
                     )
                   : SizedBox.shrink(),
-              ListPoster(imageUrl: agendaPoster!),
+              committee != "IP"
+                  ? ListPoster(imageUrl: agendaPoster!)
+                  : Container(),
               SizedBox(height: 10.0),
-              CustomListTile(
-                icon: Icons.book,
-                title: 'About',
-                text: description!,
-              ),
+              // CustomListTile(
+              //   icon: Icons.book,
+              //   title: 'About',
+              //   text: description!,
+              // ),
               SizedBox(height: 10),
               ListTile(
                 leading: Icon(

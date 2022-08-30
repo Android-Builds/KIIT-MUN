@@ -29,7 +29,7 @@ class _DashBoardState extends State<DashBoard> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Schedule(),
+    // Schedule(),
     ContactsPage(),
   ];
 
@@ -224,7 +224,7 @@ class _DashBoardState extends State<DashBoard> {
               appBar: AppBar(
                 centerTitle: true,
                 title: Text(
-                  'KIIT e-MUN',
+                  'KIIT MUN 2022',
                   style: TextStyle(
                     fontSize: size.width * 0.045,
                     fontWeight: FontWeight.bold,
@@ -241,10 +241,10 @@ class _DashBoardState extends State<DashBoard> {
                     icon: Icon(Icons.home),
                     label: 'Home',
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.schedule),
-                    label: 'Schedule',
-                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Icon(Icons.schedule),
+                  //   label: 'Schedule',
+                  // ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.contact_phone),
                     label: 'Contacts',

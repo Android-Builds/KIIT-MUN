@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mun/utils/constants.dart';
 
+import '../../utils/themes.dart';
+
 class MunWidget extends StatelessWidget {
   const MunWidget({Key? key}) : super(key: key);
 
@@ -18,10 +20,13 @@ class MunWidget extends StatelessWidget {
             child: Image.asset('$munLogo'),
           ),
           Text(
-            'KIIT e-MUN\n\nDecember 17 - December 19\n\n$tagLine',
+            'KIIT International MUN 2022\n\nA Decade of Diplomacy \n#LiterrateToLiberate\n\nSeptember 9 - September 11',
             textAlign: TextAlign.center,
             style: GoogleFonts.montserrat(
-              color: Colors.green[300],
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              // color: Colors.green[300],
+              color: accentColor,
             ),
           ),
         ],

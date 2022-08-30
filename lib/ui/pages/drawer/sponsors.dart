@@ -27,6 +27,36 @@ class Sponsors extends StatelessWidget {
   }
 }
 
+List<String> sponsorsLogo = [
+  "https://kiitmun.org/assets/img/sponsers/VIP%20Identity%20Color%20CMYK_page-0001.jpg",
+  "https://kiitmun.org/assets/img/sponsers/Nikon%20Logo.png",
+  "https://kiitmun.org/assets/img/sponsers/East%20Outdoor%20Logo%20for%20Light%20Backdrop_page-0001.jpg",
+  "https://kiitmun.org/assets/img/sponsers/Lakme'.jpg",
+  "https://kiitmun.org/assets/img/sponsers/Drunken%20Monkey.png",
+  "https://kiitmun.org/assets/img/sponsers/UNI%20STREET%20LOGO%204.jpg",
+  "https://kiitmun.org/assets/img/sponsers/Badelog%20black.png",
+  "https://kiitmun.org/assets/img/sponsers/GrabOn_-_Official_Logo.png",
+  "https://kiitmun.org/assets/img/sponsers/mediakart.png",
+  "https://kiitmun.org/assets/img/sponsers/barah%20baj%20gaye.jpg",
+  "https://kiitmun.org/assets/img/sponsers/logo.png",
+  "https://kiitmun.org/assets/img/sponsers/Pritam.jpg",
+];
+
+List<String> sponsorType = [
+  "Associate Partner",
+  "Photography Partner",
+  "Radio Partner",
+  "Salon Partner",
+  "Munchies Partner",
+  "Merchandise Partner",
+  "Lifestyle Partner",
+  "Saving Partner",
+  "Health and Wellness Partner",
+  "Cuisine Partner",
+  "Education Partner",
+  "Outfit Partner",
+];
+
 class LoadSponsors extends StatefulWidget {
   @override
   _LoadSponsorsState createState() => _LoadSponsorsState();
@@ -101,8 +131,8 @@ class _LoadSponsorsState extends State<LoadSponsors> {
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: FlipTile(
-            imageUrl: sponsors['${index + 1}']['logo'],
-            type: sponsors['${index + 1}']['type'],
+            imageUrl: sponsorsLogo[index],
+            type: sponsorType[index],
           ),
         );
       },

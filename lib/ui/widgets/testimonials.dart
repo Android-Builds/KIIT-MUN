@@ -6,7 +6,15 @@ import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 
 class Testimonials extends StatelessWidget {
-  const Testimonials({Key? key}) : super(key: key);
+  Testimonials({Key? key}) : super(key: key);
+
+  List<String> names = [
+    "SAGNIK GHOSH",
+    "MANAS MISHRA",
+    "RHEA SINHA",
+    "SURARCHI KUMAR",
+    "OM CHAITANYA"
+  ];
 
   Future<void> _showMyDialog(
     BuildContext context,
@@ -73,8 +81,8 @@ class Testimonials extends StatelessWidget {
                 return InkWell(
                   onTap: () => _showMyDialog(
                     context,
-                    members.values.elementAt(index)['name'],
-                    members.values.elementAt(index)['testimonial'],
+                    names[index],
+                    testimonials[index],
                     members.values.elementAt(index)['designation'],
                   ),
                   child: Container(
@@ -103,7 +111,7 @@ class Testimonials extends StatelessWidget {
                                 backgroundColor:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 backgroundImage: CachedNetworkImageProvider(
-                                  members.values.elementAt(index)['imageUrl'],
+                                  imagesOfTop5[index],
                                 ),
                               ),
                             ),
@@ -112,8 +120,7 @@ class Testimonials extends StatelessWidget {
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               text: TextSpan(
-                                text: members.values.elementAt(index)['name'] +
-                                    '\n',
+                                text: names[index] + '\n',
                                 style:
                                     DefaultTextStyle.of(context).style.copyWith(
                                           fontSize: size.width * 0.035,

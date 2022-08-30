@@ -6,7 +6,7 @@ import 'package:mun/ui/pages/drawer/about/about_page.dart';
 import 'package:mun/ui/pages/drawer/credits.dart';
 import 'package:mun/ui/pages/drawer/executuve_board.dart';
 import 'package:mun/ui/pages/drawer/gallery.dart';
-import 'package:mun/ui/pages/drawer/partners.dart';
+import 'package:mun/ui/pages/drawer/collaborators.dart';
 import 'package:mun/ui/pages/drawer/sponsors.dart';
 import 'package:mun/ui/pages/drawer/study_guide.dart';
 import 'package:mun/ui/widgets/media_buttons.dart';
@@ -25,11 +25,13 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: size.height * 0.4,
+            height: size.height * 0.2,
+            padding: EdgeInsets.only(top: 10.0),
             width: size.width,
             color: !darkMode ? Colors.white : Colors.black,
             child: Image.asset(
               !darkMode ? '$eMunBlack' : '$eMunWhite',
+              height: 20,
               fit: BoxFit.contain,
             ),
           ),
@@ -76,11 +78,11 @@ class AppDrawer extends StatelessWidget {
                   children: [
                     CardListTile(
                         title: 'Committee Details', path: CommittePage()),
-                    CardListTile(title: 'Agendas', path: Agendas()),
+                    // CardListTile(title: 'Agendas', path: Agendas()),
                     CardListTile(title: 'Study Guide', path: StudyGuide()),
                   ],
                 ),
-                CardListTile(title: 'Executive Board', path: ExecutiveBoard()),
+                // CardListTile(title: 'Executive Board', path: ExecutiveBoard()),
                 CardListTile(title: 'Collaborators', path: Partners()),
                 CardListTile(title: 'Sponsors', path: Sponsors()),
                 CardListTile(title: 'Gallery', path: Gallery()),

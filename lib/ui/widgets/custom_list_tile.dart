@@ -7,11 +7,11 @@ class CustomListTile extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.title,
-    required this.text,
+    this.text,
   }) : super(key: key);
   final IconData icon;
   final String title;
-  final String text;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +33,18 @@ class CustomListTile extends StatelessWidget {
           ),
           onTap: () => Navigator.of(context).pop(),
         ),
-        ListTile(
-          dense: true,
-          leading: SizedBox(width: size.width * 0.1),
-          title: Text(
-            text + "\n",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: size.width * 0.03,
+        if (text != "")
+          ListTile(
+            dense: true,
+            leading: SizedBox(width: size.width * 0.1),
+            title: Text(
+              text! + "\n",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: size.width * 0.03,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
