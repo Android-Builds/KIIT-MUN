@@ -14,6 +14,7 @@ import 'package:mun/ui/pages/dashboard/home_page.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -146,27 +147,32 @@ class _DashBoardState extends State<DashBoard> {
             child: Column(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://kiitmun.org/dev/assets/img/carousel/carousel8.jpg',
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      child: Container(
-                        height: size.height * 0.24,
-                        width: size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      baseColor: Colors.grey,
-                      highlightColor: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    // child: CachedNetworkImage(
+                    //   imageUrl:
+                    //       'https://kiitmun.org/dev/assets/img/carousel/carousel8.jpg',
+                    //   placeholder: (context, url) => Shimmer.fromColors(
+                    //     child: Container(
+                    //       height: size.height * 0.24,
+                    //       width: size.width,
+                    //       decoration: BoxDecoration(
+                    //         color: Colors.grey,
+                    //         borderRadius: BorderRadius.circular(10.0),
+                    //       ),
+                    //     ),
+                    //     baseColor: Colors.grey,
+                    //     highlightColor: Theme.of(context).scaffoldBackgroundColor,
+                    //   ),
+                    // ),
+                    child: InkWell(
+                        onTap: () => {
+                              launch(
+                                  "https://www.instagram.com/p/ChwO_P_KnA1/?igshid=MDJmNzVkMjY="),
+                            },
+                        child: Image.asset("assets/smaryain.png"))),
                 Spacer(),
                 Text(
-                  '18th December. Mark your calenders !',
+                  '10th September. Mark your calenders !',
                   style: TextStyle(
                     fontSize: size.width * 0.035,
                     fontWeight: FontWeight.bold,

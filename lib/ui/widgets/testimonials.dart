@@ -72,80 +72,85 @@ class Testimonials extends StatelessWidget {
           Map members = snapshot.data.docs[0].data();
           return SizedBox(
             height: size.height * 0.28,
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: members.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () => _showMyDialog(
-                    context,
-                    names[index],
-                    testimonials[index],
-                    members.values.elementAt(index)['designation'],
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 5.0,
-                      vertical: 10.0,
+            child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: members.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () => _showMyDialog(
+                      context,
+                      names[index],
+                      testimonials[index],
+                      members.values.elementAt(index)['designation'],
                     ),
-                    height: size.height * 0.3,
-                    width: size.width * 0.45,
-                    child: Card(
-                      elevation: 8.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.0,
+                        vertical: 10.0,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: 42.5,
-                              backgroundColor:
-                                  darkMode ? Colors.white : Colors.black,
-                              child: CircleAvatar(
-                                radius: 42.0,
+                      height: size.height * 0.3,
+                      width: size.width * 0.45,
+                      child: Card(
+                        elevation: 8.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 42.5,
                                 backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                backgroundImage: CachedNetworkImageProvider(
-                                  imagesOfTop5[index],
+                                    darkMode ? Colors.white : Colors.black,
+                                child: CircleAvatar(
+                                  radius: 42.0,
+                                  backgroundColor:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                    imagesOfTop5[index],
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 20.0),
-                            RichText(
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              text: TextSpan(
-                                text: names[index] + '\n',
-                                style:
-                                    DefaultTextStyle.of(context).style.copyWith(
-                                          fontSize: size.width * 0.035,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: members.values
-                                        .elementAt(index)['designation'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: size.width * 0.028,
-                                      color: accentColor,
+                              SizedBox(height: 20.0),
+                              RichText(
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                text: TextSpan(
+                                  text: names[index] + '\n',
+                                  style: DefaultTextStyle.of(context)
+                                      .style
+                                      .copyWith(
+                                        fontSize: size.width * 0.035,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: members.values
+                                          .elementAt(index)['designation'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: size.width * 0.028,
+                                        color: accentColor,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           );
         } else {

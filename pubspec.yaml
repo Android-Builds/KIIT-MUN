@@ -60,6 +60,19 @@ dependencies:
   intl: ^0.17.0
 
   flutter_launcher_icons: ^0.10.0
+  google_maps_flutter: ^2.1.12
+  permission_handler: ^10.0.0
+  flutter_native_splash:
+
+flutter_native_splash:
+  image: "assets/spla.png"
+  fullScreen: true
+  # color: "#000000"
+  android: true
+  ios: true
+  background_image: "assets/spla.png"
+  android_12:
+    image: "assets/spla.png"
 
 flutter_icons:
   android: true

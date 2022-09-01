@@ -9,9 +9,13 @@ import 'package:mun/ui/pages/drawer/gallery.dart';
 import 'package:mun/ui/pages/drawer/collaborators.dart';
 import 'package:mun/ui/pages/drawer/sponsors.dart';
 import 'package:mun/ui/pages/drawer/study_guide.dart';
+import 'package:mun/ui/pages/drawer/uncharter.dart';
 import 'package:mun/ui/widgets/media_buttons.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
+
+import '../pages/drawer/commiteeLocation.dart';
+import '../pages/drawer/pdf_viewer/view_pdf.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -80,12 +84,26 @@ class AppDrawer extends StatelessWidget {
                         title: 'Committee Details', path: CommittePage()),
                     // CardListTile(title: 'Agendas', path: Agendas()),
                     CardListTile(title: 'Study Guide', path: StudyGuide()),
+                    CardListTile(
+                        title: "Committees Location", path: CommitteLocation()),
+
+                    //    Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ViewPdf(
+                    //       url: studyGuide[index],
+                    //       name: committeeNames[index],
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
                 // CardListTile(title: 'Executive Board', path: ExecutiveBoard()),
+                CardListTile(title: "UN Charter", path: UNCharter()),
                 CardListTile(title: 'Collaborators', path: Partners()),
                 CardListTile(title: 'Sponsors', path: Sponsors()),
                 CardListTile(title: 'Gallery', path: Gallery()),
+
                 ExpansionTile(
                   textColor: accentColor,
                   iconColor: accentColor,

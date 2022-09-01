@@ -70,7 +70,7 @@ class _CommittePageState extends State<CommittePage> {
                   return Loader();
                 else if (snapshot.hasData) {
                   Map doc = snapshot.data.docs[0].data();
-                  return commiteeList(doc, size);
+                  return commiteeList(size);
                 } else
                   return Center(child: Text('Error Fetching Data'));
               },
@@ -78,7 +78,7 @@ class _CommittePageState extends State<CommittePage> {
     );
   }
 
-  Widget commiteeList(Map map, Size size) {
+  Widget commiteeList(Size size) {
     return ListView.builder(
       controller: ScrollController(),
       physics: BouncingScrollPhysics(),
@@ -102,9 +102,7 @@ class _CommittePageState extends State<CommittePage> {
               right: 15.0,
             ),
             leading: Container(
-              decoration: BoxDecoration(
-                  // border: Border.all(),
-                  ),
+              decoration: BoxDecoration(),
               child: Image.asset(
                 logo[index],
                 fit: BoxFit.cover,
@@ -224,22 +222,26 @@ class _CommittePageState extends State<CommittePage> {
               //   text: description!,
               // ),
               SizedBox(height: 10),
-              ListTile(
-                leading: Icon(
-                  FontAwesomeIcons.book,
-                  color: Color(0xFFd4af37),
-                ),
-                title: Text(
-                  "Executive Board",
-                  style: TextStyle(
-                    fontSize: size.width * 0.05,
-                    fontWeight: FontWeight.bold,
-                    color: accentColor,
-                  ),
-                ),
-                onTap: () => Navigator.of(context).pop(),
-              ),
-              ListPoster(imageUrl: ebPoster!),
+              committee != "UNSC"
+                  ? ListTile(
+                      leading: Icon(
+                        FontAwesomeIcons.book,
+                        color: Color(0xFFd4af37),
+                      ),
+                      title: Text(
+                        "Executive Board",
+                        style: TextStyle(
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                          color: accentColor,
+                        ),
+                      ),
+                      onTap: () => Navigator.of(context).pop(),
+                    )
+                  : SizedBox.shrink(),
+              committee != "UNSC"
+                  ? ListPoster(imageUrl: ebPoster!)
+                  : SizedBox.shrink(),
             ],
           ),
         );

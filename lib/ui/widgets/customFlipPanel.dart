@@ -134,15 +134,15 @@ class FlipClock extends StatelessWidget {
     if (_showHours) {
       digitList.addAll([
         _buildSegment(
-            timeStream,
-            (DateTime time) => (countdownMode)
-                ? (timeLeft.inHours % 24) ~/ 10
-                : (time.hour) ~/ 10,
-            (DateTime time) => (countdownMode)
-                ? (timeLeft.inHours % 24) % 10
-                : (time.hour) % 10,
-            startTime,
-            "Hours"),
+          timeStream,
+          (DateTime time) => (countdownMode)
+              ? (timeLeft.inHours % 24) ~/ 10
+              : (time.hour) ~/ 10,
+          (DateTime time) =>
+              (countdownMode) ? (timeLeft.inHours % 24) % 10 : (time.hour) % 10,
+          startTime,
+          "Hours",
+        ),
         Column(
           children: <Widget>[
             Padding(

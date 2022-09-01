@@ -98,10 +98,6 @@ class _LoadPartnersState extends State<LoadPartners> {
             horizontal: 20.0,
             vertical: 10.0,
           ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
-          ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             // child: CachedNetworkImage(
@@ -124,8 +120,6 @@ class _LoadPartnersState extends State<LoadPartners> {
               width: size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(image: AssetImage(collabs[index])),
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
           ),

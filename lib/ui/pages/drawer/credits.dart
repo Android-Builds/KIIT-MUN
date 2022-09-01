@@ -45,7 +45,7 @@ class Credits extends StatelessWidget {
         Column(
           children: <Widget>[
             Text(
-              'Developed by: \n\nShashank Deepak \n Web and App Team',
+              'Developed by: \n\n Web and App Team',
               style: textStyle,
               textAlign: TextAlign.center,
             ),
@@ -56,8 +56,7 @@ class Credits extends StatelessWidget {
                 IconButton(
                   icon: Icon(FontAwesomeIcons.linkedin),
                   onPressed: () {
-                    launch(
-                        'https://www.linkedin.com/in/shashank-deepak-08488922b');
+                    launch('');
                   },
                 ),
                 SizedBox(
@@ -68,7 +67,7 @@ class Credits extends StatelessWidget {
                   onPressed: () async {
                     final Uri _emailLaunchUri = Uri(
                       scheme: 'mailto',
-                      path: 'shashankdeepak3@gmail.com',
+                      path: '',
                       queryParameters: {'subject': 'Problem in KIIT MUN app!'},
                     );
                     var url = _emailLaunchUri.toString();
