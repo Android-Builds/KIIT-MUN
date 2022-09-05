@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mun/ui/pages/dashboard/humanRights.dart';
 import 'package:mun/ui/pages/drawer/agendas.dart';
 import 'package:mun/ui/pages/drawer/committee.dart';
 import 'package:mun/ui/pages/drawer/about/about_page.dart';
@@ -29,13 +30,13 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: size.height * 0.2,
+            height: size.height * 0.3,
             padding: EdgeInsets.only(top: 10.0),
-            width: size.width,
+            // width: size.width,
             color: !darkMode ? Colors.white : Colors.black,
             child: Image.asset(
               !darkMode ? '$eMunBlack' : '$eMunWhite',
-              height: 20,
+              height: 30,
               fit: BoxFit.contain,
             ),
           ),
@@ -84,24 +85,16 @@ class AppDrawer extends StatelessWidget {
                         title: 'Committee Details', path: CommittePage()),
                     // CardListTile(title: 'Agendas', path: Agendas()),
                     CardListTile(title: 'Study Guide', path: StudyGuide()),
-                    CardListTile(
-                        title: "Committees Location", path: CommitteLocation()),
-
-                    //    Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ViewPdf(
-                    //       url: studyGuide[index],
-                    //       name: committeeNames[index],
-                    //     ),
-                    //   ),
-                    // )
+                    // CardListTile(
+                    //     title: "Committees Location", path: CommitteLocation()),
                   ],
                 ),
                 // CardListTile(title: 'Executive Board', path: ExecutiveBoard()),
                 CardListTile(title: "UN Charter", path: UNCharter()),
+                CardListTile(
+                    title: "Human Rights Convention", path: HumanRights()),
                 CardListTile(title: 'Collaborators', path: Partners()),
-                CardListTile(title: 'Sponsors', path: Sponsors()),
+                // CardListTile(title: 'Sponsors', path: Sponsors()),
                 CardListTile(title: 'Gallery', path: Gallery()),
 
                 ExpansionTile(

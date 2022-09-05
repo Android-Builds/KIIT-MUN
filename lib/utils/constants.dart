@@ -55,9 +55,9 @@ List<String> images = [
 
 String munLogo = 'assets/kiitMUN.png';
 
-String eMunBlack = 'assets/e_mun_2022.jfif';
+String eMunBlack = 'assets/emun.jpeg';
 
-String eMunWhite = 'assets/e_mun_2022.jfif';
+String eMunWhite = 'assets/emun.jpeg';
 
 String tagLine = '#ConcordToConquer';
 
@@ -108,13 +108,6 @@ List<About> abouts = [
         "One of India's top universities, Kalinga Institute of Industrial Technology (KIIT), is famous for the caliber of its teaching and research. It was established as an industrial training institute in Bhubaneswar in 1992–1993, in a leased home with 12 pupils and 2 teachers. In the age of unpopular schooling and much cautious embracing of globalization, Prof. Achyuta Samanta had a vision for a school that would emphasize academic excellence and offer uncountable chances for students to acquire comprehensive knowledge with very little financial support.\n\nWith just three programmes to begin with—Engineering, MBA, and MCA—KIIT's dedication to quality led to the Ministry of HRD, Government of India, awarding it Deemed to be University status under Section 3 of UGC Act, 1956, in 2004. This made KIIT the earliest Institute to achieve the distinction of obtaining University status in less than 6 years, which has been proudly inscribed in the Limca Book of Records. It has been ranked No. 1 among self-financing institutions of the country in the Atal Ranking of Institutions on Innovation Achievements (ARIIA), 2022 of the Ministry of Education, Government of India. It is India's 1st QS 5 Stars Rated University (QS World University Ranking) and is the only University of India to hold the Prestigious ISAS badge (International Associations of University) and the only University of India to win the The Awards Asia for Leadership and Management by Times Higher Education Rankings for its unstinting commitment to its staff and students. Recently, KIIT ranked 8th globally for Reducing Inequalities by the Times Higher Education Impact Rankings 2022 and also ranked 20th by NIRF, Govt. of India.on.\n\n30,000 students are educated at KIIT, who come from 65 different nations and all around India. Through its 23 schools, it offers more than 115 academic programmes, and more than 195 international organizations collaborate with it in the workplace. More than 100 multinational corporations and numerous national companies obtain their personnel from KIIT for placement. For its outstanding contribution in the field of sports and games, KIIT has been awarded as the best Sports University of India (Sportstar Aces Award). The University has a long history of holding numerous international and national seminars, congresses, workshops, and even important sporting events in practically every topic of interest. With its expansive 25 Square Kilometer Academic Township, 23 World Class Campuses, 2500+ illustrious Faculty and Researchers, 16 Sports Complexes, largest indoor and outdoor stadiums of any university, 15 Food Courts, and greenest campus in India, KIIT offers a holistic approach to human development that is unmatched in the nation. Instead of resting on its past success and rapid expansion, KIIT looks forward to reaching greater heights in academics, research, and global rankings.",
     // 'KIIT International MUN has been hosting a chain of successful editions since its inception in 2013. Having established the stronghold in its debut edition, KIIT MUN has been able to uphold the calibre of its diplomats and its commitment to making an impact, and ever since, the event has been setting a benchmark a little higher with every edition. The anticipation keeps escalating with each year and we have come a long way- starting with a meagre number of participants in 2013 to 2,500 in 2016, we kept things consistent and the growth static up till 2019 with the same enthusiasm. The enormous world is divided by its selfish interests and we strive to make it smaller, uniting it in the process through participation from not just the renowned institutions and organisations in our nation, but from countries and nations from every nook and corner of the world.\n\nIn its previous editions, KIIT International MUN, the largest MUN of its kind in South Asia, has been graced by the presence of eminent personalities who are renowned in all walks of life. KIIT International MUN has been a stage for various comedians like Bishwa Kalyan Rath, Kenny Sebastian, Rahul Subramanian, Abish Mathew, and Gaurav Kapur, the platform shared by the likes of Mr Kamal Singh, the Executive Director of UN Global Compact Network India, Allen Gammel OBE, Director of the British Council India, Debanjan Chakrabarti – Director British Council, East India, and by a plethora of foreign diplomats and emissaries like Mr Hector Cueva Jacome, Ambassador of Ecuador in India; Mr Fleming Raul Duarte Ramos, Ambassador of Paraguay to India; Mr Claudio Ansorena Montero, Ambassador of Costa Rica to India and Mrs Barbara Wickham, Director of British Council in India, political personalities like Akhilesh Yadav, and other distinguished speakers and diplomats. Since the very first edition, the significance and popularity of the conference have grown exponentially; hosting esteemed personalities to conduct resourceful workshops, deliberating about global concerns for an entire day with representatives of other nations and celebrating together through music and dance, amidst smiles. Even amidst the global pandemic, KIIT International MUN adapted to the virtual mode of organising the conference in 2021, successfully bringing together around 450 delegates from every nook and corner of the nation. Not letting the circumstances and the non-feasibility of organising the conference physically deter, KIIT International eMUN was made a success. From diplomats and dignitaries who graced the occasion virtually to a stand-up comedy show featuring Mr Gaurav Kapur, the spirit of MUN was upheld triumphantly.\n\nKIIT International Model United Nations has successfully catered to diplomacy and merriment of participants and has played a pivotal role in bringing about a revolution in the MUN circuit that the dilemmas that were dissected into by young delegates, seemed a bit more surmountable. With a beautiful legacy, KIIT International MUN looks forward to be organised with more devout enthusiasm and participation than ever before, taking into account each success, and looking out to ameliorate and uphold the very spirit of a united world.',
     imageUrl: '',
-  ),
-  new About(
-    name: 'KIIT MUN Society',
-    description:
-        'For great ideas and plausible resolutions, one needs human interaction, arguments and debates. The KIIT MUN Society is an exemplary representation of the same. Founded in 2013 by the ambitious alumni of KIIT – Snehadeep Kayet, Ashesh Das and Siddhant Sadangi – the society has, since its inception, kept the fire of diplomacy and debate aflame.\n\nThe formation of KIITMUN Society marked a revolution in the MUN circuit of the country, and by simulating KIIT MUN 2013, the community grabbed the attention of the potential and enthusiastic MUNers across the country which is evident by the participation of around one thousand delegates in the maiden edition of the event.The optimism of the society lies in the individual characters.\n\nSince 2013, the society has aspired to grow in terms of both quality and achievements. Erudite personalities like Soumya Basu, Abhradeep Mukherjee, and Shankha Das have exhibited their profound potential as leaders and mentors with their indomitable spirits and knowledge. They displayed pragmatic approach while arranging various events and the annual KIIT International MUN, and thereby retained the legacy that was initiated in the year 2013.\n\nVarious students of KIIT, pursuing studies in different fields of education, and belonging to varied streams like Law, Biotechnology, Medicine, Arts, along with Engineering, have cumulatively joined in this endeavour to make the society reach its pinnacle of success. Apart from administering the KIIT MUN annually, the society also takes the initiative to arrange periodic sessions for the ardent MUN enthusiasts.\n\nThe society tries to mould them by imparting knowledge about international relations in a global context. These sessions convey various facts and figures encompassing the working bodies, as well as the various committees of the United Nations. Additionally, KIIT MUN Society actively organizes workshops to portray a detailed picture of the actual working procedure of the MUN, thereby helping individuals to incorporate the basic information of the United Nations as well.\n\nThe KIIT MUN Society – the name itself, brings upon an emotion indescribable.  It is not just a student body, but, is a second family for the people associated with it. With the promise of carrying forward the legacy in the coming years, the society –currently is in its seventh year, is in the process of organizing KIIT International MUN, under the guidance of the present kingpins of the society.',
-    imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/kiit-mun-15f26.appspot.com/o/mun_stuffs%2Fmun_society.jpg?alt=media&token=94fe10f8-2856-4114-96a3-f173f1a5c055',
   ),
 ];
 
@@ -335,24 +328,26 @@ List<String> eb = [
 ];
 
 List<String> studyGuide = [
-  "",
-  "",
+  "https://kiitmun.org/study_docs/unctad_merged.pdf",
+  "https://kiitmun.org/study_docs/wha_merged.pdf",
   "https://kiitmun.org/study_docs/unhrc_merged.pdf",
-  "https://kiitmun.org/study_docs/ipcc_merged.pdf",
   "https://kiitmun.org/study_docs/ip_merged.pdf",
+  "https://kiitmun.org/study_docs/disec_merged.pdf",
+  "https://kiitmun.org/study_docs/unccpcj_merged.pdf",
+  "https://kiitmun.org/study_docs/ipcc_merged.pdf",
   "https://kiitmun.org/study_docs/specpol_merged.pdf",
-  "https://kiitmun.org/study_docs/jcc_merged.pdf",
   "https://kiitmun.org/study_docs/wb_merged.pdf",
   "https://kiitmun.org/study_docs/uncsw_merged.pdf",
-  "https://kiitmun.org/study_docs/disec_merged.pdf",
-  "",
-  "https://kiitmun.org/study_docs/unctad_merged.pdf",
-  "",
-  "https://kiitmun.org/study_docs/unccpcj_merged.pdf",
   "https://kiitmun.org/study_docs/iaea_merged.pdf",
+  "https://kiitmun.org/study_docs/unsc_merged.pdf",
+  "https://kiitmun.org/study_docs/jcc_merged.pdf",
+  "https://kiitmun.org/study_docs/oic_merged.pdf",
+  "https://kiitmun.org/study_docs/unpbc_merged.pdf",
 ];
 
 List<String> collabs = [
+  "assets/Collaborators/Asset1.png",
+  "assets/Collaborators/Asset2.png",
   "assets/Collaborators/Asset3.png",
   "assets/Collaborators/Asset4.png",
   "assets/Collaborators/Asset5.png",
@@ -365,9 +360,4 @@ List<String> collabs = [
   "assets/Collaborators/Asset12.png",
   "assets/Collaborators/Asset13.png",
   "assets/Collaborators/Asset14.png",
-  "assets/Collaborators/Asset15.png",
-  "assets/Collaborators/Asset16.png",
-  "assets/Collaborators/Asset17.png",
-  "assets/Collaborators/Asset18.png",
-  "assets/Collaborators/Asset19.png",
 ];

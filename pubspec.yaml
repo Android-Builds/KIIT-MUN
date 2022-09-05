@@ -46,6 +46,8 @@ dependencies:
 
   #pdf
   syncfusion_flutter_pdfviewer: ^19.3.56-beta
+  path_provider: ^2.0.7
+  open_file: ^3.2.1
 
   #image
   carousel_slider:
@@ -60,9 +62,10 @@ dependencies:
   intl: ^0.17.0
 
   flutter_launcher_icons: ^0.10.0
-  google_maps_flutter: ^2.1.12
+
   permission_handler: ^10.0.0
   flutter_native_splash:
+  flutter_native_timezone: ^2.0.0
 
 flutter_native_splash:
   image: "assets/spla.png"

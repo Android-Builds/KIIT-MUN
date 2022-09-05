@@ -88,43 +88,37 @@ class _LoadPartnersState extends State<LoadPartners> {
   }
 
   partnerList() {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: collabs.length,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 10.0,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Text("International MUNs", style: TextStyle(fontSize: 20)),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            // child: CachedNetworkImage(
-            //   imageUrl: collabs[index],
-            //   placeholder: (context, url) => Shimmer.fromColors(
-            //     child: Container(
-            //       height: size.height * 0.32,
-            //       width: size.width,
-            //       decoration: BoxDecoration(
-            //         color: Colors.grey,
-            //         borderRadius: BorderRadius.circular(10.0),
-            //       ),
-            //     ),
-            //     baseColor: Colors.grey,
-            //     highlightColor: Theme.of(context).scaffoldBackgroundColor,
-            //   ),
-            // ),
-            child: Container(
+          for (int index = 0; index < 10; index++)
+            Container(
               height: size.height * 0.32,
               width: size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(image: AssetImage(collabs[index])),
               ),
             ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Text("National NGOs",
+                style: TextStyle(fontSize: 20, color: Colors.white)),
           ),
-        );
-      },
+          for (int index = 10; index <= 13; index++)
+            Container(
+              height: size.height * 0.32,
+              width: size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(collabs[index])),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

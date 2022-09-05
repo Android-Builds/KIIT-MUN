@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             dense: true,
             title: Text(
-              'Testimonials:',
+              'The KIITMUN Insignia',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: size.width * 0.05,

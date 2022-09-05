@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mun/models/notification.dart';
 import 'package:mun/ui/pages/dashboard.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
@@ -11,6 +12,7 @@ initTime() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
   await Firebase.initializeApp();
   initTime();
   runApp(MyApp());

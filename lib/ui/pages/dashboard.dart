@@ -16,6 +16,8 @@ import 'package:mun/utils/themes.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../models/notification.dart';
+
 class DashBoard extends StatefulWidget {
   @override
   _DashBoardState createState() => _DashBoardState();
@@ -30,7 +32,7 @@ class _DashBoardState extends State<DashBoard> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    // Schedule(),
+    Schedule(),
     ContactsPage(),
   ];
 
@@ -55,7 +57,7 @@ class _DashBoardState extends State<DashBoard> {
         FlutterLocalNotificationsPlugin();
 
     var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('@drawable/kiitmun');
     var initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
@@ -80,7 +82,7 @@ class _DashBoardState extends State<DashBoard> {
             channel.id,
             channel.name,
             channelDescription: channel.description,
-            icon: 'app_icon',
+            icon: '@drawable/kiitmun',
             enableVibration: true,
             playSound: true,
             enableLights: true,
@@ -221,6 +223,9 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
+    NotificationService()
+        .showNotification(1, "Mun Meet at 10", "Hello there", 10, 59);
+
     size = MediaQuery.of(context).size;
     darkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return isOffline
@@ -247,10 +252,10 @@ class _DashBoardState extends State<DashBoard> {
                     icon: Icon(Icons.home),
                     label: 'Home',
                   ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(Icons.schedule),
-                  //   label: 'Schedule',
-                  // ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.schedule),
+                    label: 'Schedule',
+                  ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.contact_phone),
                     label: 'Contacts',

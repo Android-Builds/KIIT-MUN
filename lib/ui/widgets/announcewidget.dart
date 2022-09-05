@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -7,15 +8,28 @@ import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AnnounceWidget extends StatelessWidget {
+import 'package:timezone/timezone.dart' as tz;
+
+import 'package:timezone/data/latest.dart' as tz;
+
+import '../../models/notification.dart';
+
+class AnnounceWidget extends StatefulWidget {
   const AnnounceWidget({Key? key}) : super(key: key);
 
+  @override
+  State<AnnounceWidget> createState() => _AnnounceWidgetState();
+}
+
+class _AnnounceWidgetState extends State<AnnounceWidget> {
   _launchURL(String url) async {
     await launchUrl(Uri.parse(url));
   }
 
   @override
   Widget build(BuildContext context) {
+    tz.initializeTimeZones();
+    NotificationService notification = NotificationService();
     return Card(
       elevation: 8.0,
       shape: RoundedRectangleBorder(
@@ -41,7 +55,9 @@ class AnnounceWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: InkWell(
-                onTap: () => _launchURL("https://kiitmun.org/registration.php"),
+                onTap: () {
+                  _launchURL("https://kiitmun.org/registration.php");
+                },
                 child: Container(
                   height: size.height * 0.07,
                   // width: size.width,

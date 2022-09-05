@@ -38,9 +38,9 @@ class Schedule extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ScheduleTab(event: event['Friday']),
-            ScheduleTab(event: event['Saturday']),
-            ScheduleTab(event: event['Sunday']),
+            ScheduleTab(day: "Friday"),
+            ScheduleTab(day: "Saturday"),
+            ScheduleTab(day: "Sunday"),
           ],
         ),
       ),

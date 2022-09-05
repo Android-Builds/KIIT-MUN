@@ -61,6 +61,9 @@ class Testimonials extends StatelessWidget {
     );
   }
 
+  final ScrollController scrollController =
+      ScrollController(initialScrollOffset: 50.0);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -73,8 +76,9 @@ class Testimonials extends StatelessWidget {
           return SizedBox(
             height: size.height * 0.28,
             child: Scrollbar(
-              isAlwaysShown: true,
+              thumbVisibility: true,
               showTrackOnHover: true,
+              controller: scrollController,
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
