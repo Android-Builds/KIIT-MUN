@@ -110,7 +110,7 @@ class ContactsPage extends StatelessWidget {
                           fontSize: size.width * 0.028,
                           color: Colors.red[300],
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

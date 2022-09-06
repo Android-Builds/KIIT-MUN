@@ -12,6 +12,7 @@ import 'package:mun/ui/widgets/custom_list_tile.dart';
 import 'package:mun/ui/widgets/list_poster.dart';
 import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommittePage extends StatefulWidget {
   @override
@@ -94,6 +95,10 @@ class _CommittePageState extends State<CommittePage> {
               committeeImage[index],
               agenda[index],
               eb[index],
+              maps[index],
+              mapLocation[index],
+              commiteeCordinator[index],
+              commiteeCordinatorNumber[index],
               size,
             ),
             contentPadding: EdgeInsets.only(
@@ -174,6 +179,10 @@ class _CommittePageState extends State<CommittePage> {
     String? committeePoster,
     String? agendaPoster,
     String? ebPoster,
+    String? mapUrl,
+    String? venue,
+    String? cordinator,
+    String? phone,
     Size size,
   ) {
     bool display = false;
@@ -242,6 +251,90 @@ class _CommittePageState extends State<CommittePage> {
               committee != "UNSC"
                   ? ListPoster(imageUrl: ebPoster!)
                   : SizedBox.shrink(),
+              ListTile(
+                leading: Icon(
+                  Icons.location_on,
+                  color: Color(0xFFd4af37),
+                ),
+                title: Text(
+                  "Venue",
+                  style: TextStyle(
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: accentColor,
+                  ),
+                ),
+                // onTap: () => Navigator.of(context).pop(),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(70, 0, 70, 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.0),
+                      child: Text(venue!, style: TextStyle(fontSize: 15)),
+                    ),
+                    Container(
+                      height: size.height * 0.06,
+                      decoration: BoxDecoration(
+                          color: accentColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: InkWell(
+                        onTap: () => {
+                          launch(mapUrl!),
+                        },
+                        child: Center(
+                          child: Text(
+                            "Venue",
+                            style: TextStyle(
+                              fontSize: size.width * 0.048,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.support_agent,
+                  color: Color(0xFFd4af37),
+                ),
+                title: Text(
+                  "Committee Co-ordinator",
+                  style: TextStyle(
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    color: accentColor,
+                  ),
+                ),
+                // onTap: () => Navigator.of(context).pop(),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(70, 0, 0, 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Icon(Icons.person, color: Colors.green[700]),
+                    Text(cordinator!, style: TextStyle(fontSize: 15)),
+                    Padding(
+                      padding: EdgeInsets.only(left: size.width * 0.2),
+                      child: IconButton(
+                        icon: Icon(Icons.call, color: Colors.green[700]),
+                        onPressed: () {
+                          String url = 'tel:+91$phone';
+                          launch(url);
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         );

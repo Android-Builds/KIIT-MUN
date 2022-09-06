@@ -223,9 +223,6 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    NotificationService()
-        .showNotification(1, "Mun Meet at 10", "Hello there", 10, 59);
-
     size = MediaQuery.of(context).size;
     darkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return isOffline

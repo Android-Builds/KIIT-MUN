@@ -30,8 +30,10 @@
     </intent-filter>
 </receiver>
 
-                    <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyA-DK2KuSpTQzFd39K9PIQyyFXwi1TFSGw"/>
+<activity 
+android:name="Hello"
+android:theme="@style/Theme.App.Starting"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

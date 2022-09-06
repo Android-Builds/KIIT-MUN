@@ -8,12 +8,6 @@ import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:timezone/timezone.dart' as tz;
-
-import 'package:timezone/data/latest.dart' as tz;
-
-import '../../models/notification.dart';
-
 class AnnounceWidget extends StatefulWidget {
   const AnnounceWidget({Key? key}) : super(key: key);
 
@@ -28,8 +22,7 @@ class _AnnounceWidgetState extends State<AnnounceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    tz.initializeTimeZones();
-    NotificationService notification = NotificationService();
+    // NotificationService notification = NotificationService();
     return Card(
       elevation: 8.0,
       shape: RoundedRectangleBorder(

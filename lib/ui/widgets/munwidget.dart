@@ -20,7 +20,7 @@ class MunWidget extends StatelessWidget {
             child: Image.asset('$munLogo'),
           ),
           Text(
-            'KIIT International MUN 2022\n\nA Decade of Diplomacy \n#LiterrateToLiberate\n\nSeptember 9 - September 11',
+            'KIIT International MUN 2022\n\nA Decade of Diplomacy \n#LiterateToLiberate\n\nSeptember 9 - September 11',
             textAlign: TextAlign.center,
             style: GoogleFonts.montserrat(
               fontWeight: FontWeight.w500,

@@ -12,7 +12,6 @@ initTime() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationService().initNotification();
   await Firebase.initializeApp();
   initTime();
   runApp(MyApp());
@@ -23,8 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'KIIT MUN',
       theme: lightTheme,
+      title: "KIIT MUN",
       darkTheme: darkTheme,
       home: DashBoard(),
     );

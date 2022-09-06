@@ -65,6 +65,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
     "Lunch",
     "Session 5",
     "High Tea",
+    "Star Night",
   ];
   List<String> saturdayEventLocation = [
     "Respective Council Room",
@@ -73,6 +74,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
     "Respective Food Courts, Central Canteen",
     "Respective Council Room",
     "Respective Council Room",
+    "Campus 6 Auditorium",
   ];
   List<String> saturdayEventStartTime = [
     "08:00AM",
@@ -81,6 +83,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
     "02:00PM",
     "02:00PM",
     "05:30PM",
+    "06:00PM",
   ];
   List<String> saturdayEventEndTime = [
     "11:00AM",
@@ -88,7 +91,8 @@ class _ScheduleTabState extends State<ScheduleTab> {
     "11:15AM",
     "03:00PM",
     "05:30PM",
-    "05:30PM",
+    "05:45PM",
+    "08:00PM",
   ];
 
   List<String> sundayEventName = [

@@ -96,27 +96,112 @@ class _LoadPartnersState extends State<LoadPartners> {
             padding: const EdgeInsets.all(30.0),
             child: Text("International MUNs", style: TextStyle(fontSize: 20)),
           ),
-          for (int index = 0; index < 10; index++)
-            Container(
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[0])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[1])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[2])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[3])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[4])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[5])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[6])),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 20.0),
+            child: Container(
               height: size.height * 0.32,
               width: size.width,
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(collabs[index])),
+                image: DecorationImage(image: AssetImage(collabs[7])),
               ),
             ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[8])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[9])),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: Text("National NGOs",
                 style: TextStyle(fontSize: 20, color: Colors.white)),
           ),
-          for (int index = 10; index <= 13; index++)
-            Container(
-              height: size.height * 0.32,
-              width: size.width,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(collabs[index])),
-              ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[10])),
             ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[11])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[12])),
+            ),
+          ),
+          Container(
+            height: size.height * 0.32,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(collabs[13])),
+            ),
+          ),
         ],
       ),
     );

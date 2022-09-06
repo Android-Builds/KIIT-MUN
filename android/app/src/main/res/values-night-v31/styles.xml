@@ -7,6 +7,28 @@
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/android12splash</item>
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+   <!-- Set the splash screen background, animated icon, and animation duration. -->
+   <item name="windowSplashScreenBackground">@color/white</item>
+
+   <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+        animated drawable. One of these is required. -->
+   <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+   <!-- Required for animated icons -->
+   <item name="windowSplashScreenAnimationDuration">200</item>
+
+   <!-- Set the theme of the Activity that directly follows your splash screen. -->
+   <!-- Required -->
+   <item name="postSplashScreenTheme">@style/Theme.AppSplash</item>
+</style>
+
+<style name="Theme.AppSplash" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/white</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/background</item>
+    <item name="windowSplashScreenAnimationDuration">1000</item>
+    <item name="postSplashScreenTheme">@style/NormalTheme</item>
+</style>
     <!-- Theme applied to the Android Window as soon as the process has started.
          This theme determines the color of the Android Window while your
          Flutter UI initializes, as well as behind your Flutter UI while its

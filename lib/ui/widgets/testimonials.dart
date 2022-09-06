@@ -16,6 +16,14 @@ class Testimonials extends StatelessWidget {
     "OM CHAITANYA"
   ];
 
+  List<String> designation = [
+    "Secretary General",
+    "Deputy Secretary General",
+    "Director General",
+    "Deputy Director General",
+    "Chargé D'affaires"
+  ];
+
   Future<void> _showMyDialog(
     BuildContext context,
     String name,
@@ -136,14 +144,13 @@ class Testimonials extends StatelessWidget {
                                       ),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: members.values
-                                          .elementAt(index)['designation'],
+                                      text: designation[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: size.width * 0.028,
+                                        fontSize: size.width * 0.025,
                                         color: accentColor,
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
