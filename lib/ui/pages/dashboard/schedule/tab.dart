@@ -88,7 +88,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
   List<String> saturdayEventEndTime = [
     "11:00AM",
     "11:15AM",
-    "11:15AM",
+    "02:00AM",
     "03:00PM",
     "05:30PM",
     "05:45PM",

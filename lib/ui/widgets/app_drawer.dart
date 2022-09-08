@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mun/ui/pages/dashboard/humanRights.dart';
+import 'package:mun/ui/pages/drawer/humanRights.dart';
 import 'package:mun/ui/pages/drawer/agendas.dart';
 import 'package:mun/ui/pages/drawer/committee.dart';
 import 'package:mun/ui/pages/drawer/about/about_page.dart';
@@ -16,6 +16,7 @@ import 'package:mun/utils/constants.dart';
 import 'package:mun/utils/themes.dart';
 
 import '../pages/drawer/commiteeLocation.dart';
+import '../pages/drawer/kiit_venue_map.dart';
 import '../pages/drawer/pdf_viewer/view_pdf.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -93,6 +94,8 @@ class AppDrawer extends StatelessWidget {
                 CardListTile(title: "UN Charter", path: UNCharter()),
                 CardListTile(
                     title: "Human Rights Convention", path: HumanRights()),
+                CardListTile(title: "KIIT Venue Map", path: KiitVenue()),
+
                 CardListTile(title: 'Collaborators', path: Partners()),
                 // CardListTile(title: 'Sponsors', path: Sponsors()),
                 CardListTile(title: 'Gallery', path: Gallery()),
